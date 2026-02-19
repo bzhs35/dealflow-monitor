@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DealFlow Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+:root {
+  --bg:      #080b12;
+  --bg2:     #0d1118;
+  --bg3:     #131720;
+  --bg4:     #181e29;
+  --border:  #1c2333;
+  --border2: #252f42;
+  --text:    #dde2ec;
+  --text2:   #7a869e;
+  --text3:   #3d4d65;
+  --cyan:    #00d4aa;
+  --cyan2:   #00f5c3;
+  --blue:    #4d90fe;
+  --amber:   #f5a623;
+  --red:     #ff5c5c;
+  --green:   #00d4aa;
+  --purple:  #9b6bff;
+  --serif:   'Instrument Serif', Georgia, serif;
+  --mono:    'IBM Plex Mono', monospace;
+  --sans:    'Geist', system-ui, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:13px;min-height:100vh;overflow-x:hidden}
+
+/* Subtle scanline */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,212,170,0.008) 2px,rgba(0,212,170,0.008) 4px);pointer-events:none;z-index:9999}
+
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* Layout */
+.shell{display:flex;min-height:100vh}
+
+/* Sidebar */
+.sidebar{width:210px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100}
+.slogo{padding:20px 16px 16px;border-bottom:1px solid var(--border)}
+.slogo-inner{display:flex;align-items:center;gap:10px}
+.slogo-glyph{width:30px;height:30px;border:1.5px solid var(--cyan);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--cyan);font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:-1px}
+.slogo-name{font-size:14px;font-weight:600;color:var(--text);letter-spacing:-0.3px}
+.slogo-sub{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+
+.nav{flex:1;padding:10px 10px;overflow-y:auto}
+.nav-section{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:12px 8px 5px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:12.5px;font-weight:400;color:var(--text2);transition:all .12s;margin-bottom:1px;user-select:none}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:rgba(0,212,170,.08);color:var(--cyan)}
+.nav-item.active .ni{color:var(--cyan)}
+.ni{font-size:14px;width:18px;text-align:center;color:var(--text3);transition:color .12s}
+.nav-badge{margin-left:auto;background:var(--bg4);border:1px solid var(--border2);border-radius:10px;padding:1px 7px;font-family:var(--mono);font-size:10px;color:var(--text2)}
+.nav-badge.hot{background:rgba(0,212,170,.1);border-color:rgba(0,212,170,.2);color:var(--cyan)}
+
+.sfooter{padding:14px 14px;border-top:1px solid var(--border)}
+.sfooter-stat{font-family:var(--mono);font-size:10px;color:var(--text3);line-height:1.7}
+.sfooter-stat span{color:var(--cyan)}
+
+/* Main */
+.main{margin-left:210px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* Topbar */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(8,11,18,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:52px;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.topbar-title{font-size:13px;font-weight:500;color:var(--text2)}
+.topbar-title strong{color:var(--text);font-weight:600}
+.breadcrumb{color:var(--text3);font-family:var(--mono);font-size:11px}
+.topbar-right{display:flex;align-items:center;gap:8px}
+
+/* Page */
+.page{padding:22px 24px;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* Stat cards */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden;transition:border-color .15s}
+.kpi:hover{border-color:var(--border2)}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .2s}
+.kpi:hover::before{opacity:1}
+.kpi-label{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+.kpi-val{font-size:24px;font-weight:700;color:var(--text);letter-spacing:-1px;line-height:1}
+.kpi-val.cyan{color:var(--cyan)}
+.kpi-val.amber{color:var(--amber)}
+.kpi-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:5px}
+.kpi-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:22px;opacity:.12}
+
+/* Filters */
+.filters{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.srch{position:relative;flex:1;min-width:180px}
+.srch input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:7px 10px 7px 32px;color:var(--text);font-family:var(--sans);font-size:12.5px;outline:none;transition:border-color .15s}
+.srch input:focus{border-color:var(--cyan)}
+.srch input::placeholder{color:var(--text3)}
+.srch-ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:13px;pointer-events:none}
+select{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:7px 26px 7px 10px;color:var(--text);font-family:var(--sans);font-size:12.5px;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%233d4d65' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;transition:border-color .15s}
+select:focus{border-color:var(--cyan)}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:11.5px;font-weight:500;cursor:pointer;transition:all .12s;border:1px solid var(--border);background:var(--bg3);color:var(--text2);user-select:none}
+.chip.on{background:rgba(0,212,170,.1);border-color:rgba(0,212,170,.25);color:var(--cyan)}
+.chip:hover{border-color:var(--border2);color:var(--text)}
+.chip .dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* Table */
+.tbl-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.tbl-head{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);gap:10px;flex-wrap:wrap}
+.tbl-title{font-size:12px;font-weight:500;color:var(--text2)}
+.tbl-meta{font-family:var(--mono);font-size:10px;color:var(--text3)}
+table{width:100%;border-collapse:collapse}
+thead th{padding:8px 14px;text-align:left;font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;background:var(--bg3);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none;transition:color .12s}
+thead th:hover{color:var(--text2)}
+thead th .sort{display:inline-block;margin-left:4px;opacity:.4}
+tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--bg3)}
+tbody td{padding:10px 14px;vertical-align:middle}
+.co-cell{display:flex;align-items:center;gap:9px}
+.co-av{width:26px;height:26px;border-radius:5px;background:var(--bg4);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:500;color:var(--cyan);flex-shrink:0}
+.co-name{font-weight:500;color:var(--text);font-size:13px}
+.co-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:1px}
+.star{cursor:pointer;font-size:14px;transition:transform .1s}
+.star:hover{transform:scale(1.2)}
+.amt{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--text)}
+.amt-sub{font-family:var(--mono);font-size:10px;color:var(--text3);display:block;margin-top:1px}
+.reg-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.reg-yes{background:var(--cyan);box-shadow:0 0 5px var(--cyan)}
+.reg-no{background:var(--text3)}
+
+/* Badges */
+.b{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-family:var(--mono);font-size:10px;font-weight:500;white-space:nowrap}
+.b-seed   {background:rgba(0,212,170,.1);color:#00d4aa;border:1px solid rgba(0,212,170,.2)}
+.b-pre    {background:rgba(0,212,170,.06);color:#00c49a;border:1px solid rgba(0,212,170,.15)}
+.b-a      {background:rgba(77,144,254,.1);color:#4d90fe;border:1px solid rgba(77,144,254,.2)}
+.b-b      {background:rgba(155,107,255,.1);color:#9b6bff;border:1px solid rgba(155,107,255,.2)}
+.b-c      {background:rgba(245,166,35,.1);color:#f5a623;border:1px solid rgba(245,166,35,.2)}
+.b-growth {background:rgba(245,166,35,.08);color:#d49020;border:1px solid rgba(245,166,35,.15)}
+.b-bridge {background:rgba(255,92,92,.1);color:#ff5c5c;border:1px solid rgba(255,92,92,.2)}
+.b-exit   {background:rgba(255,92,92,.08);color:#e05050;border:1px solid rgba(255,92,92,.15)}
+.b-def    {background:rgba(255,255,255,.04);color:var(--text2);border:1px solid var(--border)}
+
+/* Empty / loading */
+.empty,.loading-st{padding:50px 20px;text-align:center;color:var(--text3)}
+.spin{width:28px;height:28px;border:2px solid var(--border2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-ico{font-size:36px;opacity:.2;margin-bottom:10px}
+
+/* Modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeUp .15s ease}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;width:100%;max-width:620px;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .2s ease}
+@keyframes slideUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-x{position:absolute;top:14px;right:14px;width:26px;height:26px;background:var(--bg3);border:1px solid var(--border);border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:15px;transition:all .12s;z-index:1}
+.modal-x:hover{background:var(--border2);color:var(--text)}
+.m-head{padding:22px 22px 18px;border-bottom:1px solid var(--border)}
+.m-av{width:42px;height:42px;border-radius:9px;background:var(--bg3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;font-weight:600;color:var(--cyan)}
+.m-title{font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(--text)}
+.m-sub{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:2px}
+.m-body{padding:18px 22px}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.mf label{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;display:block;margin-bottom:3px}
+.mf .v{font-size:13px;color:var(--text);font-weight:500}
+.mf .v.mono{font-family:var(--mono);color:var(--cyan);font-size:14px;font-weight:600}
+.m-desc{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:12px;font-size:12.5px;color:var(--text2);line-height:1.65;margin-bottom:14px}
+.m-inv-box{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:12px 14px}
+.m-inv-box label{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px;display:block;margin-bottom:8px}
+.inv-chips{display:flex;flex-wrap:wrap;gap:5px}
+.ic{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:3px 9px;font-family:var(--mono);font-size:10px;color:var(--text2)}
+.reg-banner{background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.15);border-radius:7px;padding:9px 12px;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--cyan);font-family:var(--mono);margin-top:12px}
+.notes-area{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:9px 12px;color:var(--text);font-family:var(--sans);font-size:12.5px;outline:none;resize:vertical;min-height:72px;margin-top:10px;transition:border-color .15s}
+.notes-area:focus{border-color:var(--cyan)}
+.save-notes{margin-top:6px;display:flex;justify-content:flex-end}
+
+/* Charts */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px}
+.chart-title{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.bar-chart{display:flex;flex-direction:column;gap:7px}
+.bar-row{display:flex;align-items:center;gap:9px}
+.bar-lbl{font-family:var(--mono);font-size:10px;color:var(--text3);width:90px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:5px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.bar-val{font-family:var(--mono);font-size:10px;color:var(--text3);width:28px;text-align:right}
+
+/* Import panel */
+.import-panel{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:20px}
+.import-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.import-sub{font-family:var(--mono);font-size:11px;color:var(--text3);margin-bottom:14px}
+.import-content-area{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text);font-family:var(--mono);font-size:11.5px;outline:none;resize:vertical;min-height:150px;line-height:1.6;transition:border-color .15s}
+.import-content-area:focus{border-color:var(--cyan)}
+.import-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.import-result{margin-top:12px;background:var(--bg4);border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-family:var(--mono);font-size:11px;color:var(--text2)}
+.import-result.ok{border-color:rgba(0,212,170,.25);background:rgba(0,212,170,.05);color:var(--cyan)}
+.import-result.err{border-color:rgba(255,92,92,.25);background:rgba(255,92,92,.05);color:var(--red)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;font-family:var(--sans);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .12s;border:none;text-decoration:none}
+.btn-cyan{background:var(--cyan);color:var(--bg);font-weight:600}
+.btn-cyan:hover{background:var(--cyan2)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--border2);color:var(--text)}
+.btn-sm{padding:5px 10px;font-size:11.5px}
+
+/* Inputs (form) */
+.ig{display:flex;flex-direction:column;gap:3px;margin-bottom:12px}
+.ig label{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.2px}
+.ig input,.ig select,.ig textarea{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-family:var(--sans);font-size:12.5px;outline:none;transition:border-color .15s}
+.ig input:focus,.ig select:focus,.ig textarea:focus{border-color:var(--cyan)}
+.ig textarea{resize:vertical;min-height:64px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fs-sep{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:12px 0 8px;border-bottom:1px solid var(--border);margin-bottom:10px}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--bg2);border:1px solid var(--border2);border-radius:9px;padding:11px 16px;display:flex;align-items:center;gap:9px;font-size:12.5px;z-index:300;animation:slideUp .2s ease;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.toast.ok{border-color:rgba(0,212,170,.3)}
+.toast.ok .tic{color:var(--cyan)}
+.toast.err{border-color:rgba(255,92,92,.3)}
+.toast.err .tic{color:var(--red)}
+
+/* Investor leaderboard */
+.inv-lb{display:flex;flex-direction:column;gap:6px}
+.inv-row{display:flex;align-items:center;gap:10px;padding:7px 10px;background:var(--bg3);border-radius:6px;cursor:pointer;transition:background .1s}
+.inv-row:hover{background:var(--bg4)}
+.inv-rank{font-family:var(--mono);font-size:10px;color:var(--text3);width:18px;text-align:right}
+.inv-name{flex:1;font-size:12.5px;color:var(--text)}
+.inv-cnt{font-family:var(--mono);font-size:11px;color:var(--cyan)}
+.inv-bar{width:60px;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.inv-bar-fill{height:100%;background:var(--cyan);border-radius:2px}
+
+/* Exit row */
+.exit-type{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.acquirer-cell{font-size:12.5px;color:var(--text2)}
+
+/* Duplicate warning */
+.dup-warn{background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-radius:7px;padding:9px 12px;font-size:12px;color:var(--amber);margin-bottom:10px;font-family:var(--mono)}
+
+/* Config banner */
+.cfg-banner{background:linear-gradient(135deg,rgba(0,212,170,.07),rgba(77,144,254,.04));border:1px solid rgba(0,212,170,.15);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px}
+.cfg-text{font-size:13px;color:var(--text2)}
+.cfg-text strong{color:var(--cyan)}
+.cfg-url{font-family:var(--mono);font-size:10px;color:var(--text3);background:var(--bg3);border:1px solid var(--border);padding:3px 9px;border-radius:5px;cursor:pointer;margin-top:4px;display:inline-block;transition:all .12s}
+.cfg-url:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* Ticker */
+.ticker{background:rgba(0,212,170,.06);border-bottom:1px solid rgba(0,212,170,.12);padding:6px 24px;font-family:var(--mono);font-size:10px;color:var(--cyan);display:flex;gap:24px;overflow:hidden;white-space:nowrap}
+.ticker span{color:var(--text3)}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .kpi-row{grid-template-columns:repeat(2,1fr)}
+  .charts-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+// ── Config ───────────────────────────────────────────────
+const DEF_API = localStorage.getItem('df_api') || 'http://localhost:5000';
+const DEF_SEC = localStorage.getItem('df_sec') || '';
+const API = () => localStorage.getItem('df_api') || 'http://localhost:5000';
+const SEC = () => localStorage.getItem('df_sec') || '';
+
+// ── Utils ────────────────────────────────────────────────
+const { useState, useEffect, useCallback, useRef } = React;
+
+const RL = { 'pre-seed':'Pre-Seed','seed':'Seed','serie_a':'Série A','serie_b':'Série B','serie_c':'Série C','serie_d_plus':'Série D+','growth':'Growth','bridge':'Bridge','dette':'Dette','inconnu':'?' };
+const RC = { 'seed':'b-seed','pre-seed':'b-pre','serie_a':'b-a','serie_b':'b-b','serie_c':'b-c','serie_d_plus':'b-c','growth':'b-growth','bridge':'b-bridge' };
+const COLS = ['#00d4aa','#4d90fe','#9b6bff','#f5a623','#ff5c5c','#06b6d4','#ec4899','#84cc16','#f97316','#6366f1'];
+
+const fmt = n => { if(!n && n!==0) return '—'; if(n>=1000) return `${(n/1000).toFixed(1)}Md€`; if(n>=1) return `${n.toFixed(1)}M€`; return `${(n*1000).toFixed(0)}k€`; };
+const ini = name => { if(!name) return '?'; const w=name.split(/\s+/).filter(Boolean); return w.length===1?w[0].slice(0,2).toUpperCase():(w[0][0]+w[1][0]).toUpperCase(); };
+const apiFetch = async (path, opts={}) => {
+  const res = await fetch(API()+path, { headers:{'Content-Type':'application/json',...(opts.headers||{})}, ...opts });
+  if(!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+};
+
+// ── Hooks ────────────────────────────────────────────────
+function useData(path, params={}, dep=[]) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const fetch_ = useCallback(async () => {
+    setLoading(true); setError(null);
+    try {
+      const qs = new URLSearchParams(Object.fromEntries(Object.entries(params).filter(([,v])=>v))).toString();
+      setData(await apiFetch(`${path}${qs?'?'+qs:''}`));
+    } catch(e){ setError(e.message); } finally { setLoading(false); }
+  }, [path, JSON.stringify(params), ...dep]);
+  useEffect(()=>{ fetch_(); },[fetch_]);
+  return { data, loading, error, refetch:fetch_ };
+}
+
+// ── Bar Chart ────────────────────────────────────────────
+function BarChart({data, color='#00d4aa'}) {
+  if(!data || !Object.keys(data).length) return <div style={{color:'var(--text3)',fontSize:11,fontFamily:'var(--mono)'}}>— Aucune donnée</div>;
+  const entries = Object.entries(data).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const max = Math.max(...entries.map(([,v])=>v));
+  return <div className="bar-chart">
+    {entries.map(([lbl,val],i)=>(
+      <div key={lbl} className="bar-row">
+        <div className="bar-lbl" title={RL[lbl]||lbl}>{RL[lbl]||lbl}</div>
+        <div className="bar-track"><div className="bar-fill" style={{width:`${(val/max)*100}%`,background:Array.isArray(color)?COLS[i%COLS.length]:color}}/></div>
+        <div className="bar-val">{val}</div>
+      </div>
+    ))}
+  </div>;
+}
+
+// ── Deal Modal ───────────────────────────────────────────
+function DealModal({deal, onClose, onUpdate}) {
+  const [notes, setNotes] = useState(deal.notes||'');
+  const [saving, setSaving] = useState(false);
+  const investors = deal.investors ? deal.investors.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const rcls = RC[deal.round_type]||'b-def';
+  const toggleWatchlist = async () => {
+    const updated = await apiFetch(`/api/deals/${deal.id}`, {method:'PATCH', headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'}, body:JSON.stringify({watchlist:!deal.watchlist})});
+    onUpdate(updated);
+  };
+  const saveNotes = async () => {
+    setSaving(true);
+    const updated = await apiFetch(`/api/deals/${deal.id}`, {method:'PATCH', headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'}, body:JSON.stringify({notes})});
+    onUpdate(updated); setSaving(false);
+  };
+  return <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+    <div className="modal">
+      <button className="modal-x" onClick={onClose}>×</button>
+      <div className="m-head">
+        <div style={{display:'flex',alignItems:'flex-start',gap:13}}>
+          <div className="m-av">{ini(deal.company_name)}</div>
+          <div style={{flex:1}}>
+            <div style={{display:'flex',alignItems:'center',gap:8}}>
+              <div className="m-title">{deal.company_name}</div>
+              <span className="star" onClick={toggleWatchlist} title={deal.watchlist?'Retirer watchlist':'Ajouter watchlist'}>{deal.watchlist?'⭐':'☆'}</span>
+              {deal.website && <a href={deal.website} target="_blank" rel="noopener noreferrer" style={{color:'var(--text3)',fontSize:13,textDecoration:'none'}} title="Site web">↗</a>}
+            </div>
+            <div className="m-sub">{deal.sector||''}{deal.business_model?' · '+deal.business_model:''}</div>
+            <div style={{display:'flex',gap:5,flexWrap:'wrap',marginTop:8}}>
+              <span className={`b ${rcls}`}>{RL[deal.round_type]||deal.round_type||'?'}</span>
+              {deal.founded_year&&<span className="b b-def">Fondé {deal.founded_year}</span>}
+              {deal.is_regional&&<span className="b b-seed">🌿 Régional</span>}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="m-body">
+        {deal.description&&<div className="m-desc">{deal.description}</div>}
+        <div className="m-grid">
+          <div className="mf"><label>Total levée</label><div className="v mono" style={{fontSize:18,fontWeight:700}}>{fmt(deal.total_amount)}</div></div>
+          <div className="mf"><label>Round</label><div className="v">{RL[deal.round_type]||deal.round_type||'?'}</div></div>
+          {deal.equity_amount!=null&&<div className="mf"><label>Equity</label><div className="v mono">{fmt(deal.equity_amount)}</div></div>}
+          {deal.debt_amount>0&&<div className="mf"><label>Dette</label><div className="v mono">{fmt(deal.debt_amount)}</div></div>}
+          <div className="mf"><label>Région</label><div className="v">{deal.region||'—'}</div></div>
+          {deal.revenue&&<div className="mf"><label>Chiffre d'affaires</label><div className="v">{deal.revenue}</div></div>}
+          <div className="mf"><label>Source</label><div className="v">{deal.source_newsletter}</div></div>
+          <div className="mf"><label>Date</label><div className="v">{deal.newsletter_date||'—'}</div></div>
+        </div>
+        {deal.is_regional&&deal.regional_presence&&deal.regional_presence!=='Aucune'&&(
+          <div className="reg-banner">🌿 <span><strong>Présence régionale :</strong> {deal.regional_presence}</span></div>
+        )}
+        {investors.length>0&&(
+          <div className="m-inv-box" style={{marginTop:12}}>
+            <label>Investisseurs</label>
+            <div className="inv-chips">{investors.map(inv=><span key={inv} className="ic">{inv}</span>)}</div>
+          </div>
+        )}
+        <div style={{marginTop:14}}>
+          <div style={{fontFamily:'var(--mono)',fontSize:'9px',color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.2px',marginBottom:4}}>Notes personnelles</div>
+          <textarea className="notes-area" value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Ajoute tes observations, piste de suivi, contexte..."/>
+          <div className="save-notes"><button className="btn btn-ghost btn-sm" onClick={saveNotes} disabled={saving}>{saving?'…':'Sauvegarder'}</button></div>
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+
+// ── Exit Modal ───────────────────────────────────────────
+function ExitModal({exit, onClose, onUpdate}) {
+  const [notes, setNotes] = useState(exit.notes||'');
+  const toggleWatchlist = async () => {
+    const updated = await apiFetch(`/api/exits/${exit.id}`, {method:'PATCH', headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'}, body:JSON.stringify({watchlist:!exit.watchlist})});
+    onUpdate(updated);
+  };
+  const saveNotes = async () => {
+    await apiFetch(`/api/exits/${exit.id}`, {method:'PATCH', headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'}, body:JSON.stringify({notes})});
+  };
+  return <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+    <div className="modal">
+      <button className="modal-x" onClick={onClose}>×</button>
+      <div className="m-head">
+        <div style={{display:'flex',alignItems:'flex-start',gap:13}}>
+          <div className="m-av">{ini(exit.company_name)}</div>
+          <div style={{flex:1}}>
+            <div style={{display:'flex',alignItems:'center',gap:8}}>
+              <div className="m-title">{exit.company_name}</div>
+              <span className="star" onClick={toggleWatchlist}>{exit.watchlist?'⭐':'☆'}</span>
+            </div>
+            <div className="m-sub">{exit.sector||''} {exit.deal_type?'· '+exit.deal_type:''}</div>
+            <div style={{display:'flex',gap:5,marginTop:8}}>
+              <span className="b b-exit">{exit.deal_type||'Exit'}</span>
+              {exit.is_regional&&<span className="b b-seed">🌿 Régional</span>}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="m-body">
+        {exit.description&&<div className="m-desc">{exit.description}</div>}
+        <div className="m-grid">
+          {exit.acquirer_name&&<div className="mf"><label>Acquéreur</label><div className="v">{exit.acquirer_name}</div></div>}
+          {exit.acquirer_country&&<div className="mf"><label>Pays acquéreur</label><div className="v">{exit.acquirer_country}</div></div>}
+          {exit.deal_value&&<div className="mf"><label>Valorisation deal</label><div className="v mono">{fmt(exit.deal_value)}</div></div>}
+          <div className="mf"><label>Région</label><div className="v">{exit.region||'—'}</div></div>
+          {exit.founded_year&&<div className="mf"><label>Fondé en</label><div className="v">{exit.founded_year}</div></div>}
+          <div className="mf"><label>Source</label><div className="v">{exit.source_newsletter}</div></div>
+        </div>
+        <div style={{marginTop:14}}>
+          <div style={{fontFamily:'var(--mono)',fontSize:'9px',color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.2px',marginBottom:4}}>Notes</div>
+          <textarea className="notes-area" value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Observations..."/>
+          <div className="save-notes"><button className="btn btn-ghost btn-sm" onClick={saveNotes}>Sauvegarder</button></div>
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+
+// ── Import Panel ─────────────────────────────────────────
+function ImportPanel({onSuccess}) {
+  const [content, setContent] = useState('');
+  const [source, setSource] = useState('');
+  const [date, setDate] = useState(new Date().toISOString().slice(0,10));
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+
+  const run = async () => {
+    if(!content.trim()) return;
+    setLoading(true); setResult(null);
+    try {
+      const r = await apiFetch('/api/import', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({secret:SEC(), content, source:source||'Import manuel', newsletter_date:date})
+      });
+      setResult({ok:true, ...r});
+      setContent('');
+      onSuccess();
+    } catch(e) { setResult({ok:false, msg:e.message}); }
+    setLoading(false);
+  };
+  return <div className="import-panel">
+    <div className="import-title">⚡ Import direct</div>
+    <div className="import-sub">Colle le texte d'une newsletter — l'IA extrait tous les deals automatiquement</div>
+    <textarea className="import-content-area" value={content} onChange={e=>setContent(e.target.value)}
+      placeholder="Colle ici le contenu brut d'une newsletter VC, email de deal flow, synthèse de levées..."/>
+    <div className="import-row">
+      <input placeholder="Source (ex: Avolta Weekly)" value={source} onChange={e=>setSource(e.target.value)} style={{background:'var(--bg3)',border:'1px solid var(--border)',borderRadius:7,padding:'7px 10px',color:'var(--text)',fontFamily:'var(--sans)',fontSize:12.5,outline:'none',flex:1,minWidth:160}}/>
+      <input type="date" value={date} onChange={e=>setDate(e.target.value)} style={{background:'var(--bg3)',border:'1px solid var(--border)',borderRadius:7,padding:'7px 10px',color:'var(--text)',fontFamily:'var(--mono)',fontSize:12,outline:'none'}}/>
+      <button className="btn btn-cyan" onClick={run} disabled={loading||!content.trim()}>
+        {loading ? <><div style={{width:13,height:13,border:'2px solid rgba(0,0,0,.3)',borderTopColor:'var(--bg)',borderRadius:'50%',animation:'spin .7s linear infinite'}}/>Analyse...</> : '↯ Importer'}
+      </button>
+    </div>
+    {result&&<div className={`import-result ${result.ok?'ok':'err'}`}>
+      {result.ok ? `✓ ${result.deals_ingested} deals · ${result.exits_ingested||0} exits importés — ${result.regional_count} régionaux${result.duplicates?.length?' · ⚠ '+result.duplicates.length+' doublon(s) détecté(s)':''}` : `✗ Erreur : ${result.msg}`}
+    </div>}
+  </div>;
+}
+
+// ── Settings Modal ────────────────────────────────────────
+function Settings({onClose}) {
+  const [api, setApi] = useState(localStorage.getItem('df_api')||'');
+  const [sec, setSec] = useState(localStorage.getItem('df_sec')||'');
+  const save = () => { localStorage.setItem('df_api',api); localStorage.setItem('df_sec',sec); window.location.reload(); };
+  return <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+    <div className="modal" style={{maxWidth:460}}>
+      <button className="modal-x" onClick={onClose}>×</button>
+      <div className="m-head"><div className="m-title" style={{fontSize:16}}>⚙ Configuration</div><div className="m-sub">Connexion au backend</div></div>
+      <div className="m-body">
+        <div className="ig"><label>URL du Backend (Render)</label><input value={api} onChange={e=>setApi(e.target.value)} placeholder="https://dealflow-xxx.onrender.com"/></div>
+        <div className="ig"><label>WEBHOOK_SECRET</label><input type="password" value={sec} onChange={e=>setSec(e.target.value)} placeholder="••••••••"/></div>
+        <div style={{display:'flex',justifyContent:'flex-end',marginTop:4}}>
+          <button className="btn btn-cyan" onClick={save}>Sauvegarder & Recharger</button>
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+
+// ── Add Deal ─────────────────────────────────────────────
+function AddDeal({onClose,onSuccess}) {
+  const [f, setF] = useState({company_name:'',description:'',round_type:'seed',equity_amount:'',debt_amount:'',sector:'',business_model:'',founded_year:'',region:'',investors:'',revenue:'',regional_presence:'',is_regional:false,source_newsletter:'Manuel',newsletter_date:new Date().toISOString().slice(0,10),notes:'',tags:'',website:''});
+  const [loading, setLoading] = useState(false);
+  const s = (k,v) => setF(p=>({...p,[k]:v}));
+  const submit = async () => {
+    if(!f.company_name) return; setLoading(true);
+    try {
+      await apiFetch('/api/deals', {method:'POST', headers:{'Content-Type':'application/json','X-Admin-Secret':SEC()}, body:JSON.stringify({...f, equity_amount:f.equity_amount?parseFloat(f.equity_amount):null, debt_amount:f.debt_amount?parseFloat(f.debt_amount):null})});
+      onSuccess(); onClose();
+    } catch(e){console.error(e);} setLoading(false);
+  };
+  return <div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
+    <div className="modal" style={{maxWidth:560}}>
+      <button className="modal-x" onClick={onClose}>×</button>
+      <div className="m-head"><div className="m-title" style={{fontSize:15}}>+ Ajouter un deal</div><div className="m-sub">Saisie manuelle</div></div>
+      <div className="m-body">
+        <div className="ig" style={{gridColumn:'1/-1'}}><label>Société *</label><input value={f.company_name} onChange={e=>s('company_name',e.target.value)} placeholder="MaTech SAS"/></div>
+        <div className="ig"><label>Description</label><textarea value={f.description} onChange={e=>s('description',e.target.value)} rows={2} placeholder="Activité..."/></div>
+        <div className="fs-sep">Financement</div>
+        <div className="form-grid">
+          <div className="ig"><label>Round</label><select value={f.round_type} onChange={e=>s('round_type',e.target.value)}><option value="pre-seed">Pre-Seed</option><option value="seed">Seed</option><option value="serie_a">Série A</option><option value="serie_b">Série B</option><option value="serie_c">Série C</option><option value="serie_d_plus">Série D+</option><option value="growth">Growth</option><option value="bridge">Bridge</option><option value="dette">Dette</option><option value="inconnu">Inconnu</option></select></div>
+          <div className="ig"><label>Equity (M€)</label><input type="number" step="0.1" value={f.equity_amount} onChange={e=>s('equity_amount',e.target.value)} placeholder="5.5"/></div>
+          <div className="ig"><label>Dette (M€)</label><input type="number" step="0.1" value={f.debt_amount} onChange={e=>s('debt_amount',e.target.value)} placeholder="0"/></div>
+          <div className="ig"><label>CA</label><input value={f.revenue} onChange={e=>s('revenue',e.target.value)} placeholder="2M€ ARR"/></div>
+        </div>
+        <div className="fs-sep">Société</div>
+        <div className="form-grid">
+          <div className="ig"><label>Secteur</label><input value={f.sector} onChange={e=>s('sector',e.target.value)} placeholder="HealthTech"/></div>
+          <div className="ig"><label>Business model</label><input value={f.business_model} onChange={e=>s('business_model',e.target.value)} placeholder="SaaS B2B"/></div>
+          <div className="ig"><label>Année fondation</label><input value={f.founded_year} onChange={e=>s('founded_year',e.target.value)} placeholder="2021"/></div>
+          <div className="ig"><label>Région</label><input value={f.region} onChange={e=>s('region',e.target.value)} placeholder="Bretagne"/></div>
+          <div className="ig" style={{gridColumn:'1/-1'}}><label>Présence régionale BZH/PDL/NOR/CVL</label><input value={f.regional_presence} onChange={e=>{s('regional_presence',e.target.value);if(e.target.value&&e.target.value!=='Aucune')s('is_regional',true);}} placeholder="ex: Siège Rennes, bureau Nantes"/></div>
+          <div className="ig" style={{gridColumn:'1/-1'}}><label>Investisseurs</label><input value={f.investors} onChange={e=>s('investors',e.target.value)} placeholder="Go Capital, Bpifrance, Eurazeo"/></div>
+          <div className="ig"><label>Site web</label><input value={f.website} onChange={e=>s('website',e.target.value)} placeholder="https://..."/></div>
+          <div className="ig"><label>Tags</label><input value={f.tags} onChange={e=>s('tags',e.target.value)} placeholder="deeptech, b2b, saas"/></div>
+        </div>
+        <div className="fs-sep">Source</div>
+        <div className="form-grid">
+          <div className="ig"><label>Source</label><input value={f.source_newsletter} onChange={e=>s('source_newsletter',e.target.value)}/></div>
+          <div className="ig"><label>Date</label><input type="date" value={f.newsletter_date} onChange={e=>s('newsletter_date',e.target.value)}/></div>
+        </div>
+        <div className="ig"><label>Notes</label><textarea value={f.notes} onChange={e=>s('notes',e.target.value)} rows={2} placeholder="Observations..."/></div>
+        <div style={{display:'flex',gap:7,justifyContent:'flex-end',marginTop:6}}>
+          <button className="btn btn-ghost" onClick={onClose}>Annuler</button>
+          <button className="btn btn-cyan" onClick={submit} disabled={loading||!f.company_name}>{loading?'…':'+ Ajouter'}</button>
+        </div>
+      </div>
+    </div>
+  </div>;
+}
+
+// ── Toast ────────────────────────────────────────────────
+function Toast({msg, type}) {
+  return <div className={`toast ${type}`}><span className="tic">{type==='ok'?'✓':'✗'}</span><span>{msg}</span></div>;
+}
+
+// ── Analytics Page ────────────────────────────────────────
+function Analytics() {
+  const {data} = useData('/api/stats');
+  const {data:invData} = useData('/api/investors');
+  if(!data) return <div className="loading-st"><div className="spin"/></div>;
+  return <div>
+    <div className="kpi-row" style={{gridTemplateColumns:'repeat(4,1fr)'}}>
+      <div className="kpi"><div className="kpi-icon">📋</div><div className="kpi-label">Total deals</div><div className="kpi-val">{data.total_deals}</div></div>
+      <div className="kpi"><div className="kpi-icon">💰</div><div className="kpi-label">Capital tracé</div><div className="kpi-val cyan">{fmt(data.total_raised)}</div></div>
+      <div className="kpi"><div className="kpi-icon">🌿</div><div className="kpi-label">Régionaux</div><div className="kpi-val amber">{data.regional_count}</div><div className="kpi-sub">{data.regional_pct}%</div></div>
+      <div className="kpi"><div className="kpi-icon">🚪</div><div className="kpi-label">Exits trackés</div><div className="kpi-val">{data.total_exits}</div></div>
+    </div>
+    <div className="charts-grid">
+      <div className="chart-card"><div className="chart-title">Deals par type de round</div><BarChart data={data.rounds} color="#00d4aa"/></div>
+      <div className="chart-card"><div className="chart-title">Deals par secteur</div><BarChart data={data.sectors} color={COLS}/></div>
+      <div className="chart-card"><div className="chart-title">Timeline mensuelle</div><BarChart data={data.timeline} color="#4d90fe"/></div>
+      <div className="chart-card">
+        <div className="chart-title">Top 15 investisseurs actifs</div>
+        {invData?.investors && <div className="inv-lb">
+          {invData.investors.slice(0,15).map((inv,i)=>{
+            const max = invData.investors[0]?.count||1;
+            return <div key={inv.name} className="inv-row">
+              <div className="inv-rank">{i+1}</div>
+              <div className="inv-name">{inv.name}</div>
+              <div className="inv-bar"><div className="inv-bar-fill" style={{width:`${(inv.count/max)*100}%`}}/></div>
+              <div className="inv-cnt">{inv.count}</div>
+            </div>;
+          })}
+        </div>}
+      </div>
+    </div>
+  </div>;
+}
+
+// ── Main App ──────────────────────────────────────────────
+function App() {
+  const [page, setPage] = useState('deals');
+  const [search, setSearch] = useState('');
+  const [roundF, setRoundF] = useState('');
+  const [sectorF, setSectorF] = useState('');
+  const [regionalF, setRegionalF] = useState(false);
+  const [watchlistF, setWatchlistF] = useState(false);
+  const [investorF, setInvestorF] = useState('');
+  const [selectedDeal, setSelectedDeal] = useState(null);
+  const [selectedExit, setSelectedExit] = useState(null);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [refetchKey, setRefetchKey] = useState(0);
+  const [showImport, setShowImport] = useState(false);
+  const [sortBy, setSortBy] = useState('created_at');
+  const [sortDir, setSortDir] = useState('desc');
+
+  const pushToast = (msg, type='ok') => { setToast({msg,type}); setTimeout(()=>setToast(null),3500); };
+  const refresh = () => { setRefetchKey(k=>k+1); };
+
+  const dealParams = {search, round_type:roundF, sector:sectorF, regional:regionalF?'true':'', watchlist:watchlistF?'true':'', investor:investorF, limit:300};
+  const exitParams  = {search, regional:regionalF?'true':'', watchlist:watchlistF?'true':''};
+
+  const {data:dealsData, loading:dealLoading, refetch:refetchDeals} = useData('/api/deals', dealParams, [refetchKey]);
+  const {data:exitsData, loading:exitLoading, refetch:refetchExits} = useData('/api/exits', exitParams, [refetchKey]);
+  const {data:stats, refetch:refetchStats} = useData('/api/stats', {}, [refetchKey]);
+  const {data:invData} = useData('/api/investors', {}, [refetchKey]);
+
+  const deals = dealsData?.deals || [];
+  const exits = exitsData?.exits || [];
+
+  const needsCfg = !localStorage.getItem('df_api');
+
+  // Sort deals client-side
+  const sorted = [...deals].sort((a,b) => {
+    let av = a[sortBy], bv = b[sortBy];
+    if(!av) return 1; if(!bv) return -1;
+    if(typeof av === 'string') return sortDir==='asc'?av.localeCompare(bv):bv.localeCompare(av);
+    return sortDir==='asc'?av-bv:bv-av;
+  });
+
+  const toggleSort = (col) => {
+    if(sortBy===col) setSortDir(d=>d==='asc'?'desc':'asc');
+    else { setSortBy(col); setSortDir('desc'); }
+  };
+
+  const exportCSV = () => {
+    const headers = ['Société','Round','Equity','Dette','Total','Région','Secteur','CA','Investisseurs','Présence régionale','Source','Date','Notes','Watchlist'];
+    const rows = sorted.map(d=>[d.company_name,RL[d.round_type]||d.round_type,d.equity_amount||'',d.debt_amount||'',d.total_amount||'',d.region||'',d.sector||'',d.revenue||'',d.investors||'',d.regional_presence||'',d.source_newsletter||'',d.newsletter_date||'',d.notes||'',d.watchlist?'Oui':'']);
+    const csv = [headers,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'})); a.download='dealflow.csv'; a.click();
+  };
+
+  const onDealUpdate = (updated) => {
+    setSelectedDeal(updated);
+    refetchDeals(); refetchStats();
+  };
+  const onExitUpdate = (updated) => {
+    setSelectedExit(updated);
+    refetchExits();
+  };
+
+  const PAGES = [
+    {id:'deals', ico:'▦', label:'Deal database'},
+    {id:'exits', ico:'⇒', label:'Exits & M&A'},
+    {id:'watchlist', ico:'⭐', label:'Watchlist'},
+    {id:'import', ico:'↯', label:'Import direct'},
+    {id:'analytics', ico:'⌁', label:'Analytics'},
+  ];
+
+  const watchlisted = deals.filter(d=>d.watchlist);
+  const watchlistedExits = exits.filter(e=>e.watchlist);
+
+  return <div className="shell">
+    <aside className="sidebar">
+      <div className="slogo">
+        <div className="slogo-inner">
+          <div className="slogo-glyph">DF</div>
+          <div>
+            <div className="slogo-name">DealFlow</div>
+            <div className="slogo-sub">Monitor v2</div>
+          </div>
+        </div>
+      </div>
+      <nav className="nav">
+        <div className="nav-section">Navigation</div>
+        {PAGES.map(p=>(
+          <div key={p.id} className={`nav-item ${page===p.id?'active':''}`} onClick={()=>setPage(p.id)}>
+            <span className="ni">{p.ico}</span>
+            {p.label}
+            {p.id==='watchlist' && watchlisted.length+watchlistedExits.length > 0 && <span className="nav-badge hot">{watchlisted.length+watchlistedExits.length}</span>}
+          </div>
+        ))}
+        <div className="nav-section" style={{marginTop:8}}>Actions</div>
+        <div className="nav-item" onClick={()=>setShowAdd(true)}><span className="ni">+</span>Ajouter un deal</div>
+        <div className="nav-item" onClick={()=>setShowSettings(true)}><span className="ni">⚙</span>Configuration</div>
+      </nav>
+      <div className="sfooter">
+        <div className="sfooter-stat"><span>{stats?.total_deals||0}</span> deals · <span>{stats?.total_exits||0}</span> exits</div>
+        <div className="sfooter-stat"><span>{fmt(stats?.total_raised||0)}</span> tracés</div>
+        <div className="sfooter-stat"><span>{stats?.regional_count||0}</span> régionaux · <span>{stats?.watchlist_count||0}</span> watchlist</div>
+      </div>
+    </aside>
+
+    <main className="main">
+      {/* Ticker */}
+      {stats && <div className="ticker">
+        <span>DEALS</span> {stats.total_deals} &nbsp;·&nbsp;
+        <span>CAPITAL</span> {fmt(stats.total_raised)} &nbsp;·&nbsp;
+        <span>EXITS</span> {stats.total_exits} &nbsp;·&nbsp;
+        <span>RÉGIONAUX</span> {stats.regional_count} ({stats.regional_pct}%) &nbsp;·&nbsp;
+        <span>WATCHLIST</span> {stats.watchlist_count} &nbsp;·&nbsp;
+        <span>EQUITY</span> {fmt(stats.total_equity)} &nbsp;·&nbsp;
+        <span>DETTE</span> {fmt(stats.total_debt)}
+      </div>}
+
+      <div className="topbar">
+        <div className="topbar-left">
+          <span className="topbar-title"><strong>{PAGES.find(p=>p.id===page)?.label}</strong></span>
+        </div>
+        <div className="topbar-right">
+          {(page==='deals'||page==='watchlist') && <button className="btn btn-ghost btn-sm" onClick={exportCSV}>↓ CSV</button>}
+          <button className="btn btn-cyan btn-sm" onClick={()=>setShowAdd(true)}>+ Deal</button>
+        </div>
+      </div>
+
+      <div className="page">
+        {needsCfg && <div className="cfg-banner">
+          <div>
+            <div className="cfg-text"><strong>Configuration requise</strong> — connectez votre backend Render</div>
+            <div className="cfg-url" onClick={()=>setShowSettings(true)}>→ Configurer l'URL du backend</div>
+          </div>
+        </div>}
+
+        {/* ── DEALS ─────────────────────────────── */}
+        {page==='deals' && <>
+          {stats && <div className="kpi-row">
+            <div className="kpi"><div className="kpi-icon">📋</div><div className="kpi-label">Total deals</div><div className="kpi-val">{stats.total_deals}</div></div>
+            <div className="kpi"><div className="kpi-icon">💰</div><div className="kpi-label">Capital tracé</div><div className="kpi-val cyan">{fmt(stats.total_raised)}</div></div>
+            <div className="kpi"><div className="kpi-icon">🌿</div><div className="kpi-label">Régionaux</div><div className="kpi-val amber">{stats.regional_count}</div><div className="kpi-sub">BZH · PDL · NOR · CVL</div></div>
+            <div className="kpi"><div className="kpi-icon">📈</div><div className="kpi-label">Equity</div><div className="kpi-val">{fmt(stats.total_equity)}</div></div>
+            <div className="kpi"><div className="kpi-icon">🏦</div><div className="kpi-label">Dette</div><div className="kpi-val">{fmt(stats.total_debt)}</div></div>
+          </div>}
+          <DealFilters search={search} setSearch={setSearch} roundF={roundF} setRoundF={setRoundF} sectorF={sectorF} setSectorF={setSectorF} regionalF={regionalF} setRegionalF={setRegionalF} watchlistF={watchlistF} setWatchlistF={setWatchlistF} invData={invData} investorF={investorF} setInvestorF={setInvestorF}/>
+          <DealTable deals={sorted} loading={dealLoading} onSelect={setSelectedDeal} sortBy={sortBy} sortDir={sortDir} onSort={toggleSort}/>
+        </>}
+
+        {/* ── EXITS ─────────────────────────────── */}
+        {page==='exits' && <>
+          {stats && <div className="kpi-row" style={{gridTemplateColumns:'repeat(3,1fr)'}}>
+            <div className="kpi"><div className="kpi-icon">🚪</div><div className="kpi-label">Total exits</div><div className="kpi-val">{stats.total_exits}</div></div>
+            <div className="kpi"><div className="kpi-icon">🌿</div><div className="kpi-label">Régionaux</div><div className="kpi-val cyan">{exits.filter(e=>e.is_regional).length}</div></div>
+            <div className="kpi"><div className="kpi-icon">⭐</div><div className="kpi-label">Watchlistés</div><div className="kpi-val">{exits.filter(e=>e.watchlist).length}</div></div>
+          </div>}
+          <div className="filters" style={{marginBottom:14}}>
+            <div className="srch"><span className="srch-ic">🔍</span><input placeholder="Société, acquéreur..." value={search} onChange={e=>setSearch(e.target.value)}/></div>
+            <div className={`chip ${regionalF?'on':''}`} onClick={()=>setRegionalF(f=>!f)}><span className="dot"/>🌿 Régional</div>
+            <div className={`chip ${watchlistF?'on':''}`} onClick={()=>setWatchlistF(f=>!f)}><span className="dot"/>⭐ Watchlist</div>
+          </div>
+          <ExitTable exits={exits.filter(e=>{
+            if(!search) return true;
+            const q=search.toLowerCase();
+            return e.company_name?.toLowerCase().includes(q)||e.acquirer_name?.toLowerCase().includes(q);
+          })} loading={exitLoading} onSelect={setSelectedExit}/>
+        </>}
+
+        {/* ── WATCHLIST ─────────────────────────── */}
+        {page==='watchlist' && <>
+          <div style={{marginBottom:14,fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)'}}>Deals et exits que tu suis activement — étoile ⭐ dans la fiche pour ajouter</div>
+          {watchlisted.length>0 && <>
+            <div style={{fontFamily:'var(--mono)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.5px',marginBottom:10}}>Deals</div>
+            <DealTable deals={watchlisted} loading={false} onSelect={setSelectedDeal} sortBy="created_at" sortDir="desc" onSort={()=>{}}/>
+          </>}
+          {watchlistedExits.length>0 && <>
+            <div style={{fontFamily:'var(--mono)',fontSize:9,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.5px',margin:'20px 0 10px'}}>Exits</div>
+            <ExitTable exits={watchlistedExits} loading={false} onSelect={setSelectedExit}/>
+          </>}
+          {watchlisted.length===0&&watchlistedExits.length===0&&<div className="empty"><div className="empty-ico">☆</div><div style={{fontSize:13}}>Watchlist vide<br/><span style={{fontSize:11,marginTop:4,display:'block'}}>Ouvre une fiche et clique ⭐ pour suivre une société</span></div></div>}
+        </>}
+
+        {/* ── IMPORT ────────────────────────────── */}
+        {page==='import' && <>
+          <ImportPanel onSuccess={()=>{refresh();pushToast('Import réussi !');}}/>
+          <div style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)',lineHeight:1.8}}>
+            <div style={{marginBottom:8,color:'var(--text2)',fontSize:12}}>🤖 Comment ça marche</div>
+            L'import utilise <strong style={{color:'var(--text)'}}>Gemini Flash</strong> (gratuit) pour extraire automatiquement :<br/>
+            → les deals (round, montants, investisseurs, région)<br/>
+            → les exits / M&A (acquéreur, deal type, valorisation)<br/>
+            → la présence régionale (BZH · PDL · NOR · CVL)<br/><br/>
+            Tu peux aussi connecter <strong style={{color:'var(--text)'}}>Make.com</strong> pour l'automatisation email → le webhook <code style={{background:'var(--bg3)',padding:'1px 5px',borderRadius:4}}>/webhook/newsletter</code> fait la même chose.<br/><br/>
+            <div style={{color:'var(--amber)',marginTop:8}}>⚠ Doublons : si une société existe déjà dans la base, le résultat l'indique — tu peux ensuite fusionner ou ignorer.</div>
+          </div>
+        </>}
+
+        {/* ── ANALYTICS ─────────────────────────── */}
+        {page==='analytics' && <Analytics key={refetchKey}/>}
+      </div>
+    </main>
+
+    {/* Modals */}
+    {selectedDeal && <DealModal deal={selectedDeal} onClose={()=>setSelectedDeal(null)} onUpdate={onDealUpdate}/>}
+    {selectedExit && <ExitModal exit={selectedExit} onClose={()=>setSelectedExit(null)} onUpdate={onExitUpdate}/>}
+    {showAdd && <AddDeal onClose={()=>setShowAdd(false)} onSuccess={()=>{refresh();pushToast('Deal ajouté !');}}/>}
+    {showSettings && <Settings onClose={()=>setShowSettings(false)}/>}
+    {toast && <Toast msg={toast.msg} type={toast.type}/>}
+  </div>;
+}
+
+// ── Sub-components ────────────────────────────────────────
+function DealFilters({search,setSearch,roundF,setRoundF,sectorF,setSectorF,regionalF,setRegionalF,watchlistF,setWatchlistF,invData,investorF,setInvestorF}) {
+  return <div className="filters">
+    <div className="srch"><span className="srch-ic">🔍</span><input placeholder="Société, investisseur, tag..." value={search} onChange={e=>setSearch(e.target.value)}/></div>
+    <select value={roundF} onChange={e=>setRoundF(e.target.value)}>
+      <option value="">Tous les rounds</option>
+      <option value="pre-seed">Pre-Seed</option>
+      <option value="seed">Seed</option>
+      <option value="serie_a">Série A</option>
+      <option value="serie_b">Série B</option>
+      <option value="serie_c">Série C</option>
+      <option value="growth">Growth</option>
+      <option value="bridge">Bridge</option>
+    </select>
+    <select value={sectorF} onChange={e=>setSectorF(e.target.value)}>
+      <option value="">Tous les secteurs</option>
+      {['HealthTech','SaaS','DeepTech','ClimateTech','FinTech','MedTech','AgriTech','SpaceTech','DefenseTech','MarTech','PropTech','Industry','Software'].map(s=><option key={s} value={s}>{s}</option>)}
+    </select>
+    {invData?.investors?.length>0 && <select value={investorF} onChange={e=>setInvestorF(e.target.value)} style={{maxWidth:180}}>
+      <option value="">Tous les investisseurs</option>
+      {invData.investors.slice(0,40).map(i=><option key={i.name} value={i.name}>{i.name} ({i.count})</option>)}
+    </select>}
+    <div className={`chip ${regionalF?'on':''}`} onClick={()=>setRegionalF(f=>!f)}><span className="dot"/>🌿 Régional</div>
+    <div className={`chip ${watchlistF?'on':''}`} onClick={()=>setWatchlistF(f=>!f)}><span className="dot"/>⭐ Watchlist</div>
+  </div>;
+}
+
+function DealTable({deals, loading, onSelect, sortBy, sortDir, onSort}) {
+  if(loading) return <div className="loading-st"><div className="spin"/><div>Chargement...</div></div>;
+  if(!deals.length) return <div className="empty"><div className="empty-ico">📭</div><div style={{fontSize:13}}>Aucun deal trouvé</div></div>;
+  const si = col => sortBy===col ? (sortDir==='asc'?'↑':'↓') : '·';
+  return <div className="tbl-wrap">
+    <div className="tbl-head">
+      <div className="tbl-title">Levées de fonds</div>
+      <div className="tbl-meta">{deals.length} résultats</div>
+    </div>
+    <div style={{overflowX:'auto'}}>
+      <table>
+        <thead><tr>
+          <th onClick={()=>onSort('company_name')}>Société <span className="sort">{si('company_name')}</span></th>
+          <th onClick={()=>onSort('round_type')}>Round <span className="sort">{si('round_type')}</span></th>
+          <th onClick={()=>onSort('total_amount')}>Total <span className="sort">{si('total_amount')}</span></th>
+          <th>Equity / Dette</th>
+          <th>Région</th>
+          <th onClick={()=>onSort('newsletter_date')}>Date <span className="sort">{si('newsletter_date')}</span></th>
+          <th>Investisseurs</th>
+          <th style={{width:30}}></th>
+        </tr></thead>
+        <tbody>
+          {deals.map(d=>(
+            <tr key={d.id} onClick={()=>onSelect(d)}>
+              <td><div className="co-cell">
+                <div className="co-av">{ini(d.company_name)}</div>
+                <div><div className="co-name">{d.company_name}</div><div className="co-sub">{d.sector||'—'}</div></div>
+              </div></td>
+              <td><span className={`b ${RC[d.round_type]||'b-def'}`}>{RL[d.round_type]||d.round_type||'?'}</span></td>
+              <td><div className="amt">{fmt(d.total_amount)}</div></td>
+              <td><div className="amt">{fmt(d.equity_amount)}{d.debt_amount>0&&<span className="amt-sub">dette {fmt(d.debt_amount)}</span>}</div></td>
+              <td><div style={{display:'flex',alignItems:'center',gap:5}}>
+                <span className={`reg-dot ${d.is_regional?'reg-yes':'reg-no'}`}/>
+                <span style={{fontSize:11.5,color:d.is_regional?'var(--cyan)':'var(--text3)',fontFamily:'var(--mono)'}}>{d.region||'—'}</span>
+              </div></td>
+              <td><span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)'}}>{d.newsletter_date||'—'}</span></td>
+              <td><div style={{fontFamily:'var(--mono)',fontSize:10,color:'var(--text3)',maxWidth:200,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={d.investors}>{d.investors||'—'}</div></td>
+              <td onClick={e=>{e.stopPropagation();}} style={{textAlign:'center'}}>{d.watchlist&&<span style={{fontSize:12}}>⭐</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>;
+}
+
+function ExitTable({exits, loading, onSelect}) {
+  if(loading) return <div className="loading-st"><div className="spin"/><div>Chargement...</div></div>;
+  if(!exits.length) return <div className="empty"><div className="empty-ico">🚪</div><div style={{fontSize:13}}>Aucun exit trouvé</div></div>;
+  return <div className="tbl-wrap">
+    <div className="tbl-head">
+      <div className="tbl-title">Exits & M&A</div>
+      <div className="tbl-meta">{exits.length} résultats</div>
+    </div>
+    <div style={{overflowX:'auto'}}>
+      <table>
+        <thead><tr>
+          <th>Société</th>
+          <th>Type de deal</th>
+          <th>Acquéreur</th>
+          <th>Pays</th>
+          <th>Valorisation</th>
+          <th>Région</th>
+          <th>Date</th>
+        </tr></thead>
+        <tbody>
+          {exits.map(e=>(
+            <tr key={e.id} onClick={()=>onSelect(e)}>
+              <td><div className="co-cell">
+                <div className="co-av">{ini(e.company_name)}</div>
+                <div><div className="co-name">{e.company_name}</div><div className="co-sub">{e.sector||'—'}</div></div>
+              </div></td>
+              <td><span className="b b-exit">{e.deal_type||'Exit'}</span></td>
+              <td><div className="acquirer-cell">{e.acquirer_name||'—'}</div></td>
+              <td><span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)'}}>{e.acquirer_country||'—'}</span></td>
+              <td><div className="amt">{e.deal_value?fmt(e.deal_value):'N/D'}</div></td>
+              <td><div style={{display:'flex',alignItems:'center',gap:5}}>
+                <span className={`reg-dot ${e.is_regional?'reg-yes':'reg-no'}`}/>
+                <span style={{fontSize:11.5,color:e.is_regional?'var(--cyan)':'var(--text3)',fontFamily:'var(--mono)'}}>{e.region||'—'}</span>
+              </div></td>
+              <td><span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)'}}>{e.newsletter_date||'—'}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
