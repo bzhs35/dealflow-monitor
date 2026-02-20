@@ -15,11 +15,11 @@
 .shell{display:flex;min-height:100vh}
 .sidebar{width:230px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100}
 .slogo{padding:24px 20px 20px}.slogo-inner{display:flex;align-items:center;gap:12px}.slogo-glyph{width:34px;height:34px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-family:var(--serif);font-size:14px;font-weight:600;font-style:italic}.slogo-name{font-family:var(--serif);font-size:17px;font-weight:500;color:var(--text)}.slogo-sub{font-family:var(--mono);font-size:9.5px;color:var(--text3);margin-top:1px}
-.nav{flex:1;padding:8px 12px;overflow-y:auto}.nav-section{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:16px 8px 6px}.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s;margin-bottom:1px;user-select:none}.nav-item:hover{background:var(--bg3);color:var(--text)}.nav-item.active{background:var(--accent-bg);color:var(--accent);font-weight:500}.nav-item.active .ni{color:var(--accent)}.ni{font-size:15px;width:20px;text-align:center;color:var(--text3)}.nav-badge{margin-left:auto;background:var(--accent-bg);border-radius:10px;padding:1px 8px;font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:500}.nav-badge.new{background:var(--blue-bg);color:var(--blue)}
+.nav{flex:1;padding:8px 12px;overflow-y:auto}.nav-section{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;padding:16px 8px 6px}.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s;margin-bottom:1px;user-select:none}.nav-item:hover{background:var(--bg3);color:var(--text)}.nav-item.active{background:var(--accent-bg);color:var(--accent);font-weight:500}.nav-item.active .ni{color:var(--accent)}.ni{font-size:15px;width:20px;text-align:center;color:var(--text3)}.nav-badge{margin-left:auto;background:var(--accent-bg);border-radius:10px;padding:1px 8px;font-family:var(--mono);font-size:10px;color:var(--accent);font-weight:500}.nav-badge.new{background:var(--blue-bg);color:var(--blue)}.nav-badge.go{background:var(--green-bg);color:var(--green)}
 .sfooter{padding:16px 18px;border-top:1px solid var(--border)}.sfooter-stat{font-family:var(--mono);font-size:10px;color:var(--text3);line-height:1.8}.sfooter-stat span{color:var(--accent);font-weight:500}
 .main{margin-left:230px;flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{position:sticky;top:0;z-index:50;background:rgba(247,245,242,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:54px;padding:0 28px;display:flex;align-items:center;justify-content:space-between}.topbar-title{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--text)}.topbar-right{display:flex;align-items:center;gap:8px}
-.ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:7px 28px;font-family:var(--mono);font-size:10.5px;color:var(--text2);display:flex;gap:20px;overflow:hidden;white-space:nowrap}.ticker span{color:var(--text3)}
+.ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:7px 28px;font-family:var(--mono);font-size:10.5px;color:var(--text2);display:flex;gap:20px;overflow:hidden;white-space:nowrap;align-items:center}.ticker span{color:var(--text3)}.ticker-sep{color:var(--border2);margin:0 2px}
 .page{padding:24px 28px;animation:fadeIn .3s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:22px}.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;position:relative;transition:box-shadow .2s;box-shadow:var(--shadow-sm)}.kpi:hover{box-shadow:var(--shadow)}.kpi-label{font-family:var(--mono);font-size:9.5px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.kpi-val{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--text);letter-spacing:-1px;line-height:1}.kpi-val.accent{color:var(--accent)}.kpi-val.green{color:var(--green)}.kpi-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:5px}.kpi-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:24px;opacity:.15}
 .filters{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;box-shadow:var(--shadow-sm)}.srch{position:relative;flex:1;min-width:180px}.srch input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 12px 8px 34px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color .15s}.srch input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,114,78,.1)}.srch input::placeholder{color:var(--text3)}.srch-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:13px;pointer-events:none}select{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 28px 8px 12px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23a8a29e' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}.chip{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;border:1px solid var(--border);background:var(--bg);color:var(--text2);user-select:none}.chip.on{background:var(--green-bg);border-color:rgba(45,122,95,.25);color:var(--green)}.chip:hover{border-color:var(--border2);color:var(--text)}
@@ -38,6 +38,11 @@
 .top-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-sm);margin-bottom:10px}.top-card:hover{box-shadow:var(--shadow);border-color:var(--border2)}.top-rank{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--bg4);width:36px;text-align:center;flex-shrink:0}.top-info{flex:1;min-width:0}.top-name{font-family:var(--serif);font-size:16px;font-weight:500;color:var(--text)}.top-meta{font-family:var(--mono);font-size:11px;color:var(--text3);margin-top:2px}.top-amount{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--accent);flex-shrink:0}
 .hist-row{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}.hist-date{font-family:var(--mono);font-size:11px;color:var(--text3);width:130px;flex-shrink:0}.hist-source{font-size:13px;color:var(--text);flex:1}.hist-counts{font-family:var(--mono);font-size:11px;color:var(--green)}
 .cfg-banner{background:var(--accent-bg);border:1px solid rgba(194,114,78,.15);border-radius:var(--radius-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.cfg-text{font-size:13.5px;color:var(--text2)}.cfg-text strong{color:var(--accent)}.cfg-url{font-family:var(--mono);font-size:10.5px;color:var(--text3);background:var(--bg2);border:1px solid var(--border);padding:4px 10px;border-radius:6px;cursor:pointer;margin-top:6px;display:inline-block;transition:all .12s}.cfg-url:hover{border-color:var(--accent);color:var(--accent)}
+/* Company detail */
+.co-detail-header{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:18px;box-shadow:var(--shadow-sm)}.co-detail-back{font-size:12px;color:var(--text3);cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-bottom:14px;transition:color .12s}.co-detail-back:hover{color:var(--accent)}
+.timeline-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);position:relative}.timeline-item:last-child{border-bottom:none}.timeline-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:4px;flex-shrink:0;position:relative;z-index:1}.timeline-line{position:absolute;left:4px;top:14px;bottom:-16px;width:2px;background:var(--border)}.timeline-item:last-child .timeline-line{display:none}
+/* GO Capital */
+.go-fund-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}.go-chip{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-family:var(--mono);font-size:10.5px;border:1px solid rgba(45,122,95,.2);background:var(--green-bg);color:var(--green)}.go-chip-x{cursor:pointer;opacity:.5;font-size:13px;margin-left:2px;transition:opacity .12s}.go-chip-x:hover{opacity:1}.go-add-row{display:flex;gap:8px;margin-bottom:16px}
 @media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.kpi-row{grid-template-columns:repeat(2,1fr)}.charts-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -46,23 +51,32 @@
 <script type="text/babel">
 const API=()=>localStorage.getItem('df_api')||'http://localhost:5000';
 const SEC=()=>localStorage.getItem('df_sec')||'';
-const {useState,useEffect,useCallback,useRef}=React;
+const {useState,useEffect,useCallback,useRef,useMemo}=React;
 const RL={'pre-seed':'Pre-Seed','seed':'Seed','serie_a':'Série A','serie_b':'Série B','serie_c':'Série C','serie_d_plus':'Série D+','growth':'Growth','bridge':'Bridge','dette':'Dette','inconnu':'?'};
 const RC={'seed':'b-seed','pre-seed':'b-pre','serie_a':'b-a','serie_b':'b-b','serie_c':'b-c','serie_d_plus':'b-c','growth':'b-growth','bridge':'b-bridge'};
 const COLS=['#C2724E','#4A72B0','#7C5CB5','#B45309','#C44040','#2D7A5F','#d97706','#059669','#6366f1','#dc2626'];
-const fmt=n=>{if(!n&&n!==0)return'—';if(n>=1000)return`${(n/1000).toFixed(1)}Md€`;if(n>=1)return`${n.toFixed(1)}M€`;return`${(n*1000).toFixed(0)}k€`;};
+const fmt=n=>{if(!n&&n!==0)return'\u2014';if(n>=1000)return`${(n/1000).toFixed(1)}Md\u20ac`;if(n>=1)return`${n.toFixed(1)}M\u20ac`;return`${(n*1000).toFixed(0)}k\u20ac`;};
 const ini=name=>{if(!name)return'?';const w=name.split(/\s+/).filter(Boolean);return w.length===1?w[0].slice(0,2).toUpperCase():(w[0][0]+w[1][0]).toUpperCase();};
+const fmtDate=d=>{if(!d)return'\u2014';try{return new Date(d+'T00:00:00').toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});}catch{return d;}};
 
 const apiFetch=async(path,opts={})=>{
   const timeout=opts._timeout||30000;const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeout);
   try{const res=await fetch(API()+path,{headers:{'Content-Type':'application/json',...(opts.headers||{})},signal:controller.signal,...opts});clearTimeout(timer);
     if(!res.ok){const body=await res.json().catch(()=>({}));throw new Error(body.error||`HTTP ${res.status}`);}return res.json();
-  }catch(e){clearTimeout(timer);if(e.name==='AbortError')throw new Error("Timeout — l'import continue en arrière-plan, rafraîchis dans 30s.");throw e;}};
+  }catch(e){clearTimeout(timer);if(e.name==='AbortError')throw new Error("Timeout \u2014 l'import continue en arri\u00e8re-plan, rafra\u00eechis dans 30s.");throw e;}};
 
 const getLastVisit=()=>localStorage.getItem('df_last_visit')||null;
 const setLastVisit=()=>localStorage.setItem('df_last_visit',new Date().toISOString());
 const getImportHistory=()=>{try{return JSON.parse(localStorage.getItem('df_import_history')||'[]');}catch{return[];}};
 const addImportHistory=(entry)=>{const h=getImportHistory();h.unshift({...entry,timestamp:new Date().toISOString()});if(h.length>50)h.length=50;localStorage.setItem('df_import_history',JSON.stringify(h));};
+
+// GO Capital fund names
+const DEFAULT_GO_FUNDS=['GO Capital','Impact Ocean Capital','IOC','Mer Invest','Sud Mer Invest','ODIEM','NAA','Nouvelle Aquitaine Acc\u00e9l\u00e9ration','Go Capital','go capital','Go capital','GO CAPITAL'];
+const getGoFunds=()=>{try{const custom=JSON.parse(localStorage.getItem('df_go_funds')||'[]');return[...new Set([...DEFAULT_GO_FUNDS,...custom])];}catch{return DEFAULT_GO_FUNDS;}};
+const getGoCustomFunds=()=>{try{return JSON.parse(localStorage.getItem('df_go_funds')||'[]');}catch{return[];}};
+const addGoFund=(name)=>{const c=getGoCustomFunds();if(!c.includes(name)&&name.trim()){c.push(name.trim());localStorage.setItem('df_go_funds',JSON.stringify(c));}};
+const removeGoFund=(name)=>{const c=getGoCustomFunds().filter(n=>n!==name);localStorage.setItem('df_go_funds',JSON.stringify(c));};
+const isGoCapitalDeal=(deal)=>{const funds=getGoFunds();const inv=(deal.investors||'').toLowerCase();return funds.some(f=>inv.includes(f.toLowerCase()));};
 
 function useData(path,params={},dep=[]){
   const[data,setData]=useState(null);const[loading,setLoading]=useState(true);const[error,setError]=useState(null);
@@ -70,38 +84,37 @@ function useData(path,params={},dep=[]){
   useEffect(()=>{fetch_();},[fetch_]);return{data,loading,error,refetch:fetch_};}
 
 function BarChart({data,color='#C2724E',fmtVal}){
-  if(!data||!Object.keys(data).length)return<div style={{color:'var(--text3)',fontSize:11.5,fontFamily:'var(--mono)'}}>Aucune donnée</div>;
+  if(!data||!Object.keys(data).length)return<div style={{color:'var(--text3)',fontSize:11.5,fontFamily:'var(--mono)'}}>Aucune donn\u00e9e</div>;
   const entries=Object.entries(data).sort((a,b)=>b[1]-a[1]).slice(0,8);const max=Math.max(...entries.map(([,v])=>v));
   return<div className="bar-chart">{entries.map(([lbl,val],i)=><div key={lbl} className="bar-row"><div className="bar-lbl" title={RL[lbl]||lbl}>{RL[lbl]||lbl}</div><div className="bar-track"><div className="bar-fill" style={{width:`${(val/max)*100}%`,background:Array.isArray(color)?COLS[i%COLS.length]:color}}/></div><div className="bar-val">{fmtVal?fmtVal(val):val}</div></div>)}</div>;}
 
-function ConfirmDialog({title,message,onConfirm,onCancel}){
-  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onCancel()}><div className="confirm-box"><h3>{title}</h3><p>{message}</p><div style={{display:'flex',gap:8,justifyContent:'center'}}><button className="btn btn-ghost" onClick={onCancel}>Annuler</button><button className="btn btn-red" onClick={onConfirm}>Supprimer</button></div></div></div>;}
+function ConfirmDialog({title,message,onConfirm,onCancel}){return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onCancel()}><div className="confirm-box"><h3>{title}</h3><p>{message}</p><div style={{display:'flex',gap:8,justifyContent:'center'}}><button className="btn btn-ghost" onClick={onCancel}>Annuler</button><button className="btn btn-red" onClick={onConfirm}>Supprimer</button></div></div></div>;}
 
 function EditDeal({deal,onClose,onSuccess}){
   const[f,setF]=useState({company_name:deal.company_name||'',description:deal.description||'',round_type:deal.round_type||'seed',equity_amount:deal.equity_amount!=null?String(deal.equity_amount):'',debt_amount:deal.debt_amount?String(deal.debt_amount):'',sector:deal.sector||'',business_model:deal.business_model||'',founded_year:deal.founded_year||'',region:deal.region||'',investors:deal.investors||'',revenue:deal.revenue||'',regional_presence:deal.regional_presence||'',is_regional:deal.is_regional||false,source_newsletter:deal.source_newsletter||'',newsletter_date:deal.newsletter_date||'',notes:deal.notes||'',tags:deal.tags||'',website:deal.website||''});
   const[loading,setLoading]=useState(false);const s=(k,v)=>setF(p=>({...p,[k]:v}));
   const submit=async()=>{if(!f.company_name)return;setLoading(true);try{const u=await apiFetch(`/api/deals/${deal.id}`,{method:'PATCH',headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'},body:JSON.stringify({...f,equity_amount:f.equity_amount?parseFloat(f.equity_amount):null,debt_amount:f.debt_amount?parseFloat(f.debt_amount):null,total_amount:(f.equity_amount?parseFloat(f.equity_amount):0)+(f.debt_amount?parseFloat(f.debt_amount):0)||null})});onSuccess(u);onClose();}catch(e){console.error(e);}setLoading(false);};
-  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal" style={{maxWidth:560}}><button className="modal-x" onClick={onClose}>×</button><div className="m-head"><div className="m-title" style={{fontSize:16}}>Modifier le deal</div><div className="m-sub">{deal.company_name}</div></div><div className="m-body">
-    <div className="ig"><label>Société *</label><input value={f.company_name} onChange={e=>s('company_name',e.target.value)}/></div>
+  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal" style={{maxWidth:560}}><button className="modal-x" onClick={onClose}>\u00d7</button><div className="m-head"><div className="m-title" style={{fontSize:16}}>Modifier le deal</div><div className="m-sub">{deal.company_name}</div></div><div className="m-body">
+    <div className="ig"><label>Soci\u00e9t\u00e9 *</label><input value={f.company_name} onChange={e=>s('company_name',e.target.value)}/></div>
     <div className="ig"><label>Description</label><textarea value={f.description} onChange={e=>s('description',e.target.value)} rows={2}/></div>
     <div className="fs-sep">Financement</div><div className="form-grid">
       <div className="ig"><label>Round</label><select value={f.round_type} onChange={e=>s('round_type',e.target.value)}>{Object.entries(RL).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></div>
-      <div className="ig"><label>Equity (M€)</label><input type="number" step="0.1" value={f.equity_amount} onChange={e=>s('equity_amount',e.target.value)}/></div>
-      <div className="ig"><label>Dette (M€)</label><input type="number" step="0.1" value={f.debt_amount} onChange={e=>s('debt_amount',e.target.value)}/></div>
+      <div className="ig"><label>Equity (M\u20ac)</label><input type="number" step="0.1" value={f.equity_amount} onChange={e=>s('equity_amount',e.target.value)}/></div>
+      <div className="ig"><label>Dette (M\u20ac)</label><input type="number" step="0.1" value={f.debt_amount} onChange={e=>s('debt_amount',e.target.value)}/></div>
       <div className="ig"><label>CA</label><input value={f.revenue} onChange={e=>s('revenue',e.target.value)}/></div></div>
-    <div className="fs-sep">Société</div><div className="form-grid">
+    <div className="fs-sep">Soci\u00e9t\u00e9</div><div className="form-grid">
       <div className="ig"><label>Secteur</label><input value={f.sector} onChange={e=>s('sector',e.target.value)}/></div>
       <div className="ig"><label>Business model</label><input value={f.business_model} onChange={e=>s('business_model',e.target.value)}/></div>
-      <div className="ig"><label>Année fondation</label><input value={f.founded_year} onChange={e=>s('founded_year',e.target.value)}/></div>
-      <div className="ig"><label>Région</label><input value={f.region} onChange={e=>s('region',e.target.value)}/></div>
-      <div className="ig" style={{gridColumn:'1/-1'}}><label>Présence régionale</label><input value={f.regional_presence} onChange={e=>{s('regional_presence',e.target.value);if(e.target.value&&e.target.value!=='Aucune')s('is_regional',true);}}/></div>
+      <div className="ig"><label>Ann\u00e9e fondation</label><input value={f.founded_year} onChange={e=>s('founded_year',e.target.value)}/></div>
+      <div className="ig"><label>R\u00e9gion</label><input value={f.region} onChange={e=>s('region',e.target.value)}/></div>
+      <div className="ig" style={{gridColumn:'1/-1'}}><label>Pr\u00e9sence r\u00e9gionale</label><input value={f.regional_presence} onChange={e=>{s('regional_presence',e.target.value);if(e.target.value&&e.target.value!=='Aucune')s('is_regional',true);}}/></div>
       <div className="ig" style={{gridColumn:'1/-1'}}><label>Investisseurs</label><input value={f.investors} onChange={e=>s('investors',e.target.value)}/></div>
       <div className="ig"><label>Site web</label><input value={f.website} onChange={e=>s('website',e.target.value)}/></div>
       <div className="ig"><label>Tags</label><input value={f.tags} onChange={e=>s('tags',e.target.value)} placeholder="deeptech, b2b, saas"/></div></div>
     <div className="fs-sep">Source</div><div className="form-grid">
       <div className="ig"><label>Source</label><input value={f.source_newsletter} onChange={e=>s('source_newsletter',e.target.value)}/></div>
       <div className="ig"><label>Date</label><input type="date" value={f.newsletter_date} onChange={e=>s('newsletter_date',e.target.value)}/></div></div>
-    <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:8}}><button className="btn btn-ghost" onClick={onClose}>Annuler</button><button className="btn btn-accent" onClick={submit} disabled={loading}>{loading?'…':'Enregistrer'}</button></div>
+    <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:8}}><button className="btn btn-ghost" onClick={onClose}>Annuler</button><button className="btn btn-accent" onClick={submit} disabled={loading}>{loading?'\u2026':'Enregistrer'}</button></div>
   </div></div></div>;}
 
 function DealModal({deal,onClose,onUpdate,onDelete,onTagClick}){
@@ -112,34 +125,34 @@ function DealModal({deal,onClose,onUpdate,onDelete,onTagClick}){
   const saveN=async()=>{setSaving(true);const u=await apiFetch(`/api/deals/${deal.id}`,{method:'PATCH',headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'},body:JSON.stringify({notes})});onUpdate(u);setSaving(false);};
   const doDelete=async()=>{try{await apiFetch(`/api/deals/${deal.id}`,{method:'DELETE',headers:{'X-Admin-Secret':SEC()}});onDelete(deal.id);}catch(e){console.error(e);}};
   if(editing)return<EditDeal deal={deal} onClose={()=>setEditing(false)} onSuccess={u=>{onUpdate(u);setEditing(false);}}/>;
-  if(confirmDel)return<ConfirmDialog title="Supprimer ce deal ?" message={`${deal.company_name} sera définitivement supprimé.`} onConfirm={doDelete} onCancel={()=>setConfirmDel(false)}/>;
-  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal"><button className="modal-x" onClick={onClose}>×</button>
+  if(confirmDel)return<ConfirmDialog title="Supprimer ce deal ?" message={`${deal.company_name} sera d\u00e9finitivement supprim\u00e9.`} onConfirm={doDelete} onCancel={()=>setConfirmDel(false)}/>;
+  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal"><button className="modal-x" onClick={onClose}>{'\u00d7'}</button>
     <div className="m-head"><div style={{display:'flex',alignItems:'flex-start',gap:14}}><div className="m-av">{ini(deal.company_name)}</div><div style={{flex:1}}>
-      <div style={{display:'flex',alignItems:'center',gap:8}}><div className="m-title">{deal.company_name}</div><span className="star" onClick={toggleWL}>{deal.watchlist?'⭐':'☆'}</span>{deal.website&&<a href={deal.website} target="_blank" rel="noopener noreferrer" style={{color:'var(--text3)',fontSize:13,textDecoration:'none'}}>↗</a>}</div>
-      <div className="m-sub">{deal.sector||''}{deal.business_model?' · '+deal.business_model:''}</div>
+      <div style={{display:'flex',alignItems:'center',gap:8}}><div className="m-title">{deal.company_name}</div><span className="star" onClick={toggleWL}>{deal.watchlist?'\u2b50':'\u2606'}</span>{deal.website&&<a href={deal.website} target="_blank" rel="noopener noreferrer" style={{color:'var(--text3)',fontSize:13,textDecoration:'none'}}>{'\u2197'}</a>}</div>
+      <div className="m-sub">{deal.sector||''}{deal.business_model?' \u00b7 '+deal.business_model:''}</div>
       <div style={{display:'flex',gap:6,flexWrap:'wrap',marginTop:10}}>
         <span className={`b ${rcls}`}>{RL[deal.round_type]||deal.round_type||'?'}</span>
-        {deal.founded_year&&<span className="b b-def">Fondé {deal.founded_year}</span>}
-        {deal.is_regional&&<span className="b b-seed">Régional</span>}
+        {deal.founded_year&&<span className="b b-def">Fond\u00e9 {deal.founded_year}</span>}
+        {deal.is_regional&&<span className="b b-seed">R\u00e9gional</span>}
         {tags.map(t=><span key={t} className="b b-def b-tag" onClick={()=>{onTagClick(t);onClose();}}>{t}</span>)}
       </div></div></div></div>
     <div className="m-body">
       {deal.description&&<div className="m-desc">{deal.description}</div>}
       <div className="m-grid">
-        <div className="mf"><label>Total levée</label><div className="v mono" style={{fontSize:20,fontWeight:700}}>{fmt(deal.total_amount)}</div></div>
+        <div className="mf"><label>Total lev\u00e9e</label><div className="v mono" style={{fontSize:20,fontWeight:700}}>{fmt(deal.total_amount)}</div></div>
         <div className="mf"><label>Round</label><div className="v">{RL[deal.round_type]||deal.round_type||'?'}</div></div>
         {deal.equity_amount!=null&&<div className="mf"><label>Equity</label><div className="v mono">{fmt(deal.equity_amount)}</div></div>}
         {deal.debt_amount>0&&<div className="mf"><label>Dette</label><div className="v mono">{fmt(deal.debt_amount)}</div></div>}
-        <div className="mf"><label>Région</label><div className="v">{deal.region||'—'}</div></div>
+        <div className="mf"><label>R\u00e9gion</label><div className="v">{deal.region||'\u2014'}</div></div>
         {deal.revenue&&<div className="mf"><label>CA</label><div className="v">{deal.revenue}</div></div>}
         <div className="mf"><label>Source</label><div className="v">{deal.source_newsletter}</div></div>
-        <div className="mf"><label>Date</label><div className="v">{deal.newsletter_date||'—'}</div></div></div>
-      {deal.is_regional&&deal.regional_presence&&deal.regional_presence!=='Aucune'&&<div className="reg-banner">🌿 <span><strong>Présence régionale :</strong> {deal.regional_presence}</span></div>}
+        <div className="mf"><label>Date</label><div className="v">{deal.newsletter_date||'\u2014'}</div></div></div>
+      {deal.is_regional&&deal.regional_presence&&deal.regional_presence!=='Aucune'&&<div className="reg-banner">{'\ud83c\udf3f'} <span><strong>Pr\u00e9sence r\u00e9gionale :</strong> {deal.regional_presence}</span></div>}
       {investors.length>0&&<div className="m-inv-box" style={{marginTop:14}}><label>Investisseurs</label><div className="inv-chips">{investors.map(inv=><span key={inv} className="ic">{inv}</span>)}</div></div>}
       <div style={{marginTop:16}}><div style={{fontFamily:'var(--mono)',fontSize:'9.5px',color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1px',marginBottom:4}}>Notes personnelles</div>
         <textarea className="notes-area" value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Observations..."/>
-        <div className="save-notes"><button className="btn btn-ghost btn-sm" onClick={saveN} disabled={saving}>{saving?'…':'Sauvegarder'}</button></div></div></div>
-    <div className="m-actions"><button className="btn btn-ghost btn-sm" onClick={()=>setEditing(true)}>✏️ Modifier</button><button className="btn btn-red btn-sm" onClick={()=>setConfirmDel(true)}>🗑 Supprimer</button><div style={{flex:1}}/></div>
+        <div className="save-notes"><button className="btn btn-ghost btn-sm" onClick={saveN} disabled={saving}>{saving?'\u2026':'Sauvegarder'}</button></div></div></div>
+    <div className="m-actions"><button className="btn btn-ghost btn-sm" onClick={()=>setEditing(true)}>{'\u270f\ufe0f Modifier'}</button><button className="btn btn-red btn-sm" onClick={()=>setConfirmDel(true)}>{'\ud83d\uddd1 Supprimer'}</button><div style={{flex:1}}/></div>
   </div></div>;}
 
 function ExitModal({exit,onClose,onUpdate,onDelete}){
@@ -147,74 +160,217 @@ function ExitModal({exit,onClose,onUpdate,onDelete}){
   const toggleWL=async()=>{const u=await apiFetch(`/api/exits/${exit.id}`,{method:'PATCH',headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'},body:JSON.stringify({watchlist:!exit.watchlist})});onUpdate(u);};
   const saveN=async()=>{await apiFetch(`/api/exits/${exit.id}`,{method:'PATCH',headers:{'X-Admin-Secret':SEC(),'Content-Type':'application/json'},body:JSON.stringify({notes})});};
   const doDelete=async()=>{try{await apiFetch(`/api/exits/${exit.id}`,{method:'DELETE',headers:{'X-Admin-Secret':SEC()}});onDelete(exit.id);}catch(e){console.error(e);}};
-  if(confirmDel)return<ConfirmDialog title="Supprimer cet exit ?" message={`${exit.company_name} sera supprimé.`} onConfirm={doDelete} onCancel={()=>setConfirmDel(false)}/>;
-  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal"><button className="modal-x" onClick={onClose}>×</button>
+  if(confirmDel)return<ConfirmDialog title="Supprimer cet exit ?" message={`${exit.company_name} sera supprim\u00e9.`} onConfirm={doDelete} onCancel={()=>setConfirmDel(false)}/>;
+  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal"><button className="modal-x" onClick={onClose}>{'\u00d7'}</button>
     <div className="m-head"><div style={{display:'flex',alignItems:'flex-start',gap:14}}><div className="m-av">{ini(exit.company_name)}</div><div style={{flex:1}}>
-      <div style={{display:'flex',alignItems:'center',gap:8}}><div className="m-title">{exit.company_name}</div><span className="star" onClick={toggleWL}>{exit.watchlist?'⭐':'☆'}</span></div>
-      <div className="m-sub">{exit.sector||''} {exit.deal_type?'· '+exit.deal_type:''}</div>
-      <div style={{display:'flex',gap:6,marginTop:10}}><span className="b b-exit">{exit.deal_type||'Exit'}</span>{exit.is_regional&&<span className="b b-seed">Régional</span>}</div></div></div></div>
+      <div style={{display:'flex',alignItems:'center',gap:8}}><div className="m-title">{exit.company_name}</div><span className="star" onClick={toggleWL}>{exit.watchlist?'\u2b50':'\u2606'}</span></div>
+      <div className="m-sub">{exit.sector||''} {exit.deal_type?'\u00b7 '+exit.deal_type:''}</div>
+      <div style={{display:'flex',gap:6,marginTop:10}}><span className="b b-exit">{exit.deal_type||'Exit'}</span>{exit.is_regional&&<span className="b b-seed">R\u00e9gional</span>}</div></div></div></div>
     <div className="m-body">
       {exit.description&&<div className="m-desc">{exit.description}</div>}
-      <div className="m-grid">{exit.acquirer_name&&<div className="mf"><label>Acquéreur</label><div className="v">{exit.acquirer_name}</div></div>}{exit.acquirer_country&&<div className="mf"><label>Pays</label><div className="v">{exit.acquirer_country}</div></div>}{exit.deal_value&&<div className="mf"><label>Valorisation</label><div className="v mono">{fmt(exit.deal_value)}</div></div>}<div className="mf"><label>Région</label><div className="v">{exit.region||'—'}</div></div>{exit.founded_year&&<div className="mf"><label>Fondé</label><div className="v">{exit.founded_year}</div></div>}<div className="mf"><label>Source</label><div className="v">{exit.source_newsletter}</div></div></div>
+      <div className="m-grid">{exit.acquirer_name&&<div className="mf"><label>Acqu\u00e9reur</label><div className="v">{exit.acquirer_name}</div></div>}{exit.acquirer_country&&<div className="mf"><label>Pays</label><div className="v">{exit.acquirer_country}</div></div>}{exit.deal_value&&<div className="mf"><label>Valorisation</label><div className="v mono">{fmt(exit.deal_value)}</div></div>}<div className="mf"><label>R\u00e9gion</label><div className="v">{exit.region||'\u2014'}</div></div>{exit.founded_year&&<div className="mf"><label>Fond\u00e9</label><div className="v">{exit.founded_year}</div></div>}<div className="mf"><label>Source</label><div className="v">{exit.source_newsletter}</div></div></div>
       <div style={{marginTop:16}}><div style={{fontFamily:'var(--mono)',fontSize:'9.5px',color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1px',marginBottom:4}}>Notes</div><textarea className="notes-area" value={notes} onChange={e=>setNotes(e.target.value)} placeholder="Observations..."/><div className="save-notes"><button className="btn btn-ghost btn-sm" onClick={saveN}>Sauvegarder</button></div></div></div>
-    <div className="m-actions"><button className="btn btn-red btn-sm" onClick={()=>setConfirmDel(true)}>🗑 Supprimer</button><div style={{flex:1}}/></div>
+    <div className="m-actions"><button className="btn btn-red btn-sm" onClick={()=>setConfirmDel(true)}>{'\ud83d\uddd1 Supprimer'}</button><div style={{flex:1}}/></div>
   </div></div>;}
 
 function ImportPanel({onSuccess}){
   const[content,setContent]=useState('');const[source,setSource]=useState('');const[date,setDate]=useState(new Date().toISOString().slice(0,10));const[loading,setLoading]=useState(false);const[result,setResult]=useState(null);
   const run=async()=>{if(!content.trim())return;setLoading(true);setResult(null);try{const r=await apiFetch('/api/import',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret:SEC(),content,source:source||'Import manuel',newsletter_date:date}),_timeout:120000});setResult({ok:true,...r});addImportHistory({source:source||'Import manuel',deals:r.deals_ingested||0,exits:r.exits_ingested||0,regional:r.regional_count||0,duplicates:r.duplicates?.length||0});setContent('');onSuccess();}catch(e){setResult({ok:false,msg:e.message});}setLoading(false);};
-  return<div className="import-panel"><div className="import-title">Import direct</div><div className="import-sub">Colle le texte d'une newsletter — l'IA extrait les deals automatiquement</div>
+  return<div className="import-panel"><div className="import-title">Import direct</div><div className="import-sub">Colle le texte d'une newsletter {'\u2014'} l'IA extrait les deals automatiquement</div>
     <textarea className="import-content-area" value={content} onChange={e=>setContent(e.target.value)} placeholder="Colle ici le contenu brut d'une newsletter VC..."/>
-    <div className="import-row"><input placeholder="Source (ex: Avolta Weekly)" value={source} onChange={e=>setSource(e.target.value)} style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:8,padding:'8px 12px',color:'var(--text)',fontFamily:'var(--sans)',fontSize:13,outline:'none',flex:1,minWidth:160}}/><input type="date" value={date} onChange={e=>setDate(e.target.value)} style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:8,padding:'8px 12px',color:'var(--text)',fontFamily:'var(--mono)',fontSize:12,outline:'none'}}/><button className="btn btn-accent" onClick={run} disabled={loading||!content.trim()}>{loading?<><div style={{width:14,height:14,border:'2px solid rgba(255,255,255,.3)',borderTopColor:'white',borderRadius:'50%',animation:'spin .7s linear infinite'}}/>Analyse...</>:'Importer'}</button></div>
-    {result&&<div className={`import-result ${result.ok?'ok':'err'}`}>{result.ok?`✓ ${result.deals_ingested} deals · ${result.exits_ingested||0} exits — ${result.regional_count} régionaux${result.duplicates?.length?' · ⚠ '+result.duplicates.length+' doublon(s)':''}`:`✗ ${result.msg}`}</div>}</div>;}
+    <div className="import-row"><input placeholder="Source (ex: Avolta Weekly)" value={source} onChange={e=>setSource(e.target.value)} style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:8,padding:'8px 12px',color:'var(--text)',fontFamily:'var(--sans)',fontSize:13,outline:'none',flex:1,minWidth:160}}/><input type="date" value={date} onChange={e=>setDate(e.target.value)} style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:8,padding:'8px 12px',color:'var(--text)',fontFamily:'var(--mono)',fontSize:12,outline:'none'}}/><button className="btn btn-accent" onClick={run} disabled={loading||!content.trim()}>{loading?'Analyse...':'Importer'}</button></div>
+    {result&&<div className={`import-result ${result.ok?'ok':'err'}`}>{result.ok?`\u2713 ${result.deals_ingested} deals \u00b7 ${result.exits_ingested||0} exits \u2014 ${result.regional_count} r\u00e9gionaux${result.duplicates?.length?' \u00b7 \u26a0 '+result.duplicates.length+' doublon(s)':''}`:`\u2717 ${result.msg}`}</div>}</div>;}
 
-function ImportHistory(){const history=getImportHistory();if(!history.length)return<div className="empty"><div className="empty-ico">📜</div><div style={{fontSize:13.5}}>Aucun import enregistré</div></div>;
-  return<div>{history.map((h,i)=><div key={i} className="hist-row"><div className="hist-date">{new Date(h.timestamp).toLocaleString('fr-FR',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</div><div className="hist-source">{h.source}</div><div className="hist-counts">{h.deals}d · {h.exits}e · {h.regional}r{h.duplicates>0?` · ⚠${h.duplicates}dup`:''}</div></div>)}</div>;}
+function ImportHistory(){const history=getImportHistory();if(!history.length)return<div className="empty"><div className="empty-ico">{'\ud83d\udcdc'}</div><div style={{fontSize:13.5}}>Aucun import enregistr\u00e9</div></div>;
+  return<div>{history.map((h,i)=><div key={i} className="hist-row"><div className="hist-date">{new Date(h.timestamp).toLocaleString('fr-FR',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</div><div className="hist-source">{h.source}</div><div className="hist-counts">{h.deals}d \u00b7 {h.exits}e \u00b7 {h.regional}r{h.duplicates>0?` \u00b7 \u26a0${h.duplicates}dup`:''}</div></div>)}</div>;}
 
 function Settings({onClose}){const[api,setApi]=useState(localStorage.getItem('df_api')||'');const[sec,setSec]=useState(localStorage.getItem('df_sec')||'');const save=()=>{localStorage.setItem('df_api',api);localStorage.setItem('df_sec',sec);window.location.reload();};
-  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal" style={{maxWidth:460}}><button className="modal-x" onClick={onClose}>×</button><div className="m-head"><div className="m-title" style={{fontSize:17}}>Configuration</div><div className="m-sub">Connexion au backend</div></div><div className="m-body"><div className="ig"><label>URL du Backend</label><input value={api} onChange={e=>setApi(e.target.value)} placeholder="https://dealflow-xxx.onrender.com"/></div><div className="ig"><label>WEBHOOK_SECRET</label><input type="password" value={sec} onChange={e=>setSec(e.target.value)} placeholder="••••••••"/></div><div style={{display:'flex',justifyContent:'flex-end',marginTop:6}}><button className="btn btn-accent" onClick={save}>Sauvegarder</button></div></div></div></div>;}
+  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal" style={{maxWidth:460}}><button className="modal-x" onClick={onClose}>{'\u00d7'}</button><div className="m-head"><div className="m-title" style={{fontSize:17}}>Configuration</div><div className="m-sub">Connexion au backend</div></div><div className="m-body"><div className="ig"><label>URL du Backend</label><input value={api} onChange={e=>setApi(e.target.value)} placeholder="https://dealflow-xxx.onrender.com"/></div><div className="ig"><label>WEBHOOK_SECRET</label><input type="password" value={sec} onChange={e=>setSec(e.target.value)} placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"/></div><div style={{display:'flex',justifyContent:'flex-end',marginTop:6}}><button className="btn btn-accent" onClick={save}>Sauvegarder</button></div></div></div></div>;}
 
 function AddDeal({onClose,onSuccess}){const[f,setF]=useState({company_name:'',description:'',round_type:'seed',equity_amount:'',debt_amount:'',sector:'',business_model:'',founded_year:'',region:'',investors:'',revenue:'',regional_presence:'',is_regional:false,source_newsletter:'Manuel',newsletter_date:new Date().toISOString().slice(0,10),notes:'',tags:'',website:''});const[loading,setLoading]=useState(false);const s=(k,v)=>setF(p=>({...p,[k]:v}));const submit=async()=>{if(!f.company_name)return;setLoading(true);try{await apiFetch('/api/deals',{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Secret':SEC()},body:JSON.stringify({...f,equity_amount:f.equity_amount?parseFloat(f.equity_amount):null,debt_amount:f.debt_amount?parseFloat(f.debt_amount):null})});onSuccess();onClose();}catch(e){console.error(e);}setLoading(false);};
-  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal" style={{maxWidth:560}}><button className="modal-x" onClick={onClose}>×</button><div className="m-head"><div className="m-title" style={{fontSize:16}}>Ajouter un deal</div></div><div className="m-body">
-    <div className="ig"><label>Société *</label><input value={f.company_name} onChange={e=>s('company_name',e.target.value)} placeholder="MaTech SAS"/></div><div className="ig"><label>Description</label><textarea value={f.description} onChange={e=>s('description',e.target.value)} rows={2}/></div>
-    <div className="fs-sep">Financement</div><div className="form-grid"><div className="ig"><label>Round</label><select value={f.round_type} onChange={e=>s('round_type',e.target.value)}>{Object.entries(RL).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></div><div className="ig"><label>Equity (M€)</label><input type="number" step="0.1" value={f.equity_amount} onChange={e=>s('equity_amount',e.target.value)}/></div><div className="ig"><label>Dette (M€)</label><input type="number" step="0.1" value={f.debt_amount} onChange={e=>s('debt_amount',e.target.value)}/></div><div className="ig"><label>CA</label><input value={f.revenue} onChange={e=>s('revenue',e.target.value)}/></div></div>
-    <div className="fs-sep">Société</div><div className="form-grid"><div className="ig"><label>Secteur</label><input value={f.sector} onChange={e=>s('sector',e.target.value)}/></div><div className="ig"><label>Business model</label><input value={f.business_model} onChange={e=>s('business_model',e.target.value)}/></div><div className="ig"><label>Année fondation</label><input value={f.founded_year} onChange={e=>s('founded_year',e.target.value)}/></div><div className="ig"><label>Région</label><input value={f.region} onChange={e=>s('region',e.target.value)}/></div><div className="ig" style={{gridColumn:'1/-1'}}><label>Présence régionale</label><input value={f.regional_presence} onChange={e=>{s('regional_presence',e.target.value);if(e.target.value&&e.target.value!=='Aucune')s('is_regional',true);}}/></div><div className="ig" style={{gridColumn:'1/-1'}}><label>Investisseurs</label><input value={f.investors} onChange={e=>s('investors',e.target.value)}/></div><div className="ig"><label>Site web</label><input value={f.website} onChange={e=>s('website',e.target.value)}/></div><div className="ig"><label>Tags</label><input value={f.tags} onChange={e=>s('tags',e.target.value)} placeholder="deeptech, b2b"/></div></div>
+  return<div className="overlay" onClick={e=>e.target===e.currentTarget&&onClose()}><div className="modal" style={{maxWidth:560}}><button className="modal-x" onClick={onClose}>{'\u00d7'}</button><div className="m-head"><div className="m-title" style={{fontSize:16}}>Ajouter un deal</div></div><div className="m-body">
+    <div className="ig"><label>Soci\u00e9t\u00e9 *</label><input value={f.company_name} onChange={e=>s('company_name',e.target.value)} placeholder="MaTech SAS"/></div><div className="ig"><label>Description</label><textarea value={f.description} onChange={e=>s('description',e.target.value)} rows={2}/></div>
+    <div className="fs-sep">Financement</div><div className="form-grid"><div className="ig"><label>Round</label><select value={f.round_type} onChange={e=>s('round_type',e.target.value)}>{Object.entries(RL).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></div><div className="ig"><label>Equity (M\u20ac)</label><input type="number" step="0.1" value={f.equity_amount} onChange={e=>s('equity_amount',e.target.value)}/></div><div className="ig"><label>Dette (M\u20ac)</label><input type="number" step="0.1" value={f.debt_amount} onChange={e=>s('debt_amount',e.target.value)}/></div><div className="ig"><label>CA</label><input value={f.revenue} onChange={e=>s('revenue',e.target.value)}/></div></div>
+    <div className="fs-sep">Soci\u00e9t\u00e9</div><div className="form-grid"><div className="ig"><label>Secteur</label><input value={f.sector} onChange={e=>s('sector',e.target.value)}/></div><div className="ig"><label>Business model</label><input value={f.business_model} onChange={e=>s('business_model',e.target.value)}/></div><div className="ig"><label>Ann\u00e9e fondation</label><input value={f.founded_year} onChange={e=>s('founded_year',e.target.value)}/></div><div className="ig"><label>R\u00e9gion</label><input value={f.region} onChange={e=>s('region',e.target.value)}/></div><div className="ig" style={{gridColumn:'1/-1'}}><label>Pr\u00e9sence r\u00e9gionale</label><input value={f.regional_presence} onChange={e=>{s('regional_presence',e.target.value);if(e.target.value&&e.target.value!=='Aucune')s('is_regional',true);}}/></div><div className="ig" style={{gridColumn:'1/-1'}}><label>Investisseurs</label><input value={f.investors} onChange={e=>s('investors',e.target.value)}/></div><div className="ig"><label>Site web</label><input value={f.website} onChange={e=>s('website',e.target.value)}/></div><div className="ig"><label>Tags</label><input value={f.tags} onChange={e=>s('tags',e.target.value)} placeholder="deeptech, b2b"/></div></div>
     <div className="fs-sep">Source</div><div className="form-grid"><div className="ig"><label>Source</label><input value={f.source_newsletter} onChange={e=>s('source_newsletter',e.target.value)}/></div><div className="ig"><label>Date</label><input type="date" value={f.newsletter_date} onChange={e=>s('newsletter_date',e.target.value)}/></div></div>
-    <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:8}}><button className="btn btn-ghost" onClick={onClose}>Annuler</button><button className="btn btn-accent" onClick={submit} disabled={loading||!f.company_name}>{loading?'…':'Ajouter'}</button></div></div></div></div>;}
+    <div style={{display:'flex',gap:8,justifyContent:'flex-end',marginTop:8}}><button className="btn btn-ghost" onClick={onClose}>Annuler</button><button className="btn btn-accent" onClick={submit} disabled={loading||!f.company_name}>{loading?'\u2026':'Ajouter'}</button></div></div></div></div>;}
 
-function Toast({msg,type}){return<div className={`toast ${type}`}><span className="tic">{type==='ok'?'✓':'✗'}</span><span>{msg}</span></div>;}
+function Toast({msg,type}){return<div className={`toast ${type}`}><span className="tic">{type==='ok'?'\u2713':'\u2717'}</span><span>{msg}</span></div>;}
 
 function Analytics({deals}){const{data}=useData('/api/stats');const{data:invData}=useData('/api/investors');if(!data)return<div className="loading-st"><div className="spin"/></div>;
   const avgByRound={};deals.forEach(d=>{if(d.round_type&&d.total_amount){if(!avgByRound[d.round_type])avgByRound[d.round_type]={sum:0,count:0};avgByRound[d.round_type].sum+=d.total_amount;avgByRound[d.round_type].count++;}});const avgData={};Object.entries(avgByRound).forEach(([k,v])=>{avgData[k]=Math.round((v.sum/v.count)*10)/10;});
-  return<div><div className="kpi-row" style={{gridTemplateColumns:'repeat(4,1fr)'}}><div className="kpi"><div className="kpi-icon">📋</div><div className="kpi-label">Total deals</div><div className="kpi-val">{data.total_deals}</div></div><div className="kpi"><div className="kpi-icon">💰</div><div className="kpi-label">Capital</div><div className="kpi-val accent">{fmt(data.total_raised)}</div></div><div className="kpi"><div className="kpi-icon">🌿</div><div className="kpi-label">Régionaux</div><div className="kpi-val green">{data.regional_count}</div><div className="kpi-sub">{data.regional_pct}%</div></div><div className="kpi"><div className="kpi-icon">🚪</div><div className="kpi-label">Exits</div><div className="kpi-val">{data.total_exits}</div></div></div>
-    <div className="charts-grid"><div className="chart-card"><div className="chart-title">Deals par round</div><BarChart data={data.rounds} color="#C2724E"/></div><div className="chart-card"><div className="chart-title">Ticket moyen par round (M€)</div><BarChart data={avgData} color="#4A72B0" fmtVal={v=>fmt(v)}/></div><div className="chart-card"><div className="chart-title">Deals par secteur</div><BarChart data={data.sectors} color={COLS}/></div><div className="chart-card"><div className="chart-title">Timeline mensuelle</div><BarChart data={data.timeline} color="#2D7A5F"/></div>
+  return<div><div className="kpi-row" style={{gridTemplateColumns:'repeat(4,1fr)'}}><div className="kpi"><div className="kpi-icon">{'\ud83d\udccb'}</div><div className="kpi-label">Total deals</div><div className="kpi-val">{data.total_deals}</div></div><div className="kpi"><div className="kpi-icon">{'\ud83d\udcb0'}</div><div className="kpi-label">Capital</div><div className="kpi-val accent">{fmt(data.total_raised)}</div></div><div className="kpi"><div className="kpi-icon">{'\ud83c\udf3f'}</div><div className="kpi-label">R\u00e9gionaux</div><div className="kpi-val green">{data.regional_count}</div><div className="kpi-sub">{data.regional_pct}%</div></div><div className="kpi"><div className="kpi-icon">{'\ud83d\udeaa'}</div><div className="kpi-label">Exits</div><div className="kpi-val">{data.total_exits}</div></div></div>
+    <div className="charts-grid"><div className="chart-card"><div className="chart-title">Deals par round</div><BarChart data={data.rounds} color="#C2724E"/></div><div className="chart-card"><div className="chart-title">Ticket moyen par round (M\u20ac)</div><BarChart data={avgData} color="#4A72B0" fmtVal={v=>fmt(v)}/></div><div className="chart-card"><div className="chart-title">Deals par secteur</div><BarChart data={data.sectors} color={COLS}/></div><div className="chart-card"><div className="chart-title">Timeline mensuelle</div><BarChart data={data.timeline} color="#2D7A5F"/></div>
     <div className="chart-card" style={{gridColumn:'1/-1'}}><div className="chart-title">Top 15 investisseurs</div>{invData?.investors&&<div className="inv-lb">{invData.investors.slice(0,15).map((inv,i)=>{const max=invData.investors[0]?.count||1;return<div key={inv.name} className="inv-row"><div className="inv-rank">{i+1}</div><div className="inv-name">{inv.name}</div><div className="inv-bar"><div className="inv-bar-fill" style={{width:`${(inv.count/max)*100}%`}}/></div><div className="inv-cnt">{inv.count}</div></div>;})}</div>}</div></div></div>;}
 
+// ======== COMPANIES PAGE ========
+function CompaniesPage({deals,onSelectDeal}){
+  const[search,setSearch]=useState('');const[selectedCo,setSelectedCo]=useState(null);const[sortBy,setSortBy]=useState('totalRaised');const[sortDir,setSortDir]=useState('desc');
+  const companies=useMemo(()=>{const map={};deals.forEach(d=>{const key=(d.company_name||'').trim().toLowerCase();if(!key)return;if(!map[key])map[key]={name:d.company_name,deals:[],totalRaised:0,sector:d.sector||'',region:d.region||'',is_regional:false,founded_year:d.founded_year||'',website:d.website||'',description:d.description||''};
+      map[key].deals.push(d);map[key].totalRaised+=(d.total_amount||0);if(d.is_regional)map[key].is_regional=true;if(d.sector&&!map[key].sector)map[key].sector=d.sector;if(d.region&&!map[key].region)map[key].region=d.region;if(d.founded_year&&!map[key].founded_year)map[key].founded_year=d.founded_year;if(d.website&&!map[key].website)map[key].website=d.website;if(d.description&&!map[key].description)map[key].description=d.description;});
+    return Object.values(map).map(c=>{c.deals.sort((a,b)=>(a.newsletter_date||'').localeCompare(b.newsletter_date||''));c.roundCount=c.deals.length;c.latestRound=c.deals[c.deals.length-1]?.round_type||'';c.firstDate=c.deals[0]?.newsletter_date||'';c.lastDate=c.deals[c.deals.length-1]?.newsletter_date||'';c.allInvestors=[...new Set(c.deals.flatMap(d=>(d.investors||'').split(',').map(s=>s.trim()).filter(Boolean)))];return c;});},[deals]);
+  const filtered=companies.filter(c=>{if(!search)return true;const q=search.toLowerCase();return c.name.toLowerCase().includes(q)||c.sector.toLowerCase().includes(q)||c.allInvestors.some(i=>i.toLowerCase().includes(q));});
+  const sorted=[...filtered].sort((a,b)=>{let av=a[sortBy],bv=b[sortBy];if(typeof av==='string')return sortDir==='asc'?av.localeCompare(bv):bv.localeCompare(av);return sortDir==='asc'?(av||0)-(bv||0):(bv||0)-(av||0);});
+  const toggleSort=col=>{if(sortBy===col)setSortDir(d=>d==='asc'?'desc':'asc');else{setSortBy(col);setSortDir('desc');}};const si=col=>sortBy===col?(sortDir==='asc'?'\u2191':'\u2193'):'\u00b7';
+
+  if(selectedCo)return<CompanyDetail co={selectedCo} onBack={()=>setSelectedCo(null)} onSelectDeal={onSelectDeal}/>;
+
+  return<div>
+    <div className="kpi-row" style={{gridTemplateColumns:'repeat(4,1fr)'}}>
+      <div className="kpi"><div className="kpi-icon">{'\ud83c\udfdb'}</div><div className="kpi-label">Soci\u00e9t\u00e9s uniques</div><div className="kpi-val">{companies.length}</div></div>
+      <div className="kpi"><div className="kpi-icon">{'\ud83d\udd01'}</div><div className="kpi-label">Multi-rounds</div><div className="kpi-val accent">{companies.filter(c=>c.roundCount>1).length}</div></div>
+      <div className="kpi"><div className="kpi-icon">{'\ud83d\udcb0'}</div><div className="kpi-label">Capital total</div><div className="kpi-val accent">{fmt(companies.reduce((s,c)=>s+c.totalRaised,0))}</div></div>
+      <div className="kpi"><div className="kpi-icon">{'\ud83c\udf3f'}</div><div className="kpi-label">R\u00e9gionales</div><div className="kpi-val green">{companies.filter(c=>c.is_regional).length}</div></div>
+    </div>
+    <div className="filters"><div className="srch"><span className="srch-ic">{'\ud83d\udd0d'}</span><input placeholder="Soci\u00e9t\u00e9, secteur, investisseur..." value={search} onChange={e=>setSearch(e.target.value)}/></div></div>
+    <div className="tbl-wrap"><div className="tbl-head"><div className="tbl-title">Soci\u00e9t\u00e9s</div><div className="tbl-meta">{sorted.length} soci\u00e9t\u00e9s</div></div>
+    <div style={{overflowX:'auto'}}><table><thead><tr>
+      <th onClick={()=>toggleSort('name')}>Soci\u00e9t\u00e9 <span className="sort">{si('name')}</span></th>
+      <th>Secteur</th>
+      <th onClick={()=>toggleSort('roundCount')}>Rounds <span className="sort">{si('roundCount')}</span></th>
+      <th onClick={()=>toggleSort('totalRaised')}>Total lev\u00e9 <span className="sort">{si('totalRaised')}</span></th>
+      <th>Dernier round</th>
+      <th>P\u00e9riode</th>
+      <th>R\u00e9gion</th>
+    </tr></thead><tbody>
+    {sorted.map(c=><tr key={c.name} onClick={()=>setSelectedCo(c)}>
+      <td><div className="co-cell"><div className="co-av">{ini(c.name)}</div><div><div className="co-name">{c.name}</div>{c.founded_year&&<div className="co-sub">Fond\u00e9 {c.founded_year}</div>}</div></div></td>
+      <td><span style={{fontSize:12.5,color:'var(--text2)'}}>{c.sector||'\u2014'}</span></td>
+      <td><span style={{fontFamily:'var(--mono)',fontSize:13,fontWeight:600,color:c.roundCount>1?'var(--accent)':'var(--text)'}}>{c.roundCount}</span></td>
+      <td><div className="amt">{fmt(c.totalRaised)}</div></td>
+      <td><span className={`b ${RC[c.latestRound]||'b-def'}`}>{RL[c.latestRound]||'?'}</span></td>
+      <td><span style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--text3)'}}>{c.firstDate?(c.firstDate===c.lastDate?fmtDate(c.firstDate):fmtDate(c.firstDate)+' \u2192 '+fmtDate(c.lastDate)):'\u2014'}</span></td>
+      <td><div style={{display:'flex',alignItems:'center',gap:6}}><span className={`reg-dot ${c.is_regional?'reg-yes':'reg-no'}`}/><span style={{fontSize:11,color:c.is_regional?'var(--green)':'var(--text3)',fontFamily:'var(--mono)'}}>{c.region||'\u2014'}</span></div></td>
+    </tr>)}
+    </tbody></table></div></div>
+  </div>;}
+
+function CompanyDetail({co,onBack,onSelectDeal}){
+  return<div>
+    <div className="co-detail-header">
+      <div className="co-detail-back" onClick={onBack}>{'\u2190 Retour aux soci\u00e9t\u00e9s'}</div>
+      <div style={{display:'flex',alignItems:'flex-start',gap:16}}>
+        <div className="m-av" style={{width:52,height:52,fontSize:20}}>{ini(co.name)}</div>
+        <div style={{flex:1}}>
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <div style={{fontFamily:'var(--serif)',fontSize:24,fontWeight:500,letterSpacing:'-0.3px'}}>{co.name}</div>
+            {co.website&&<a href={co.website} target="_blank" rel="noopener noreferrer" style={{color:'var(--text3)',fontSize:14,textDecoration:'none'}}>{'\u2197'}</a>}
+          </div>
+          <div style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)',marginTop:3}}>{co.sector||''}{co.founded_year?' \u00b7 Fond\u00e9 '+co.founded_year:''}{co.region?' \u00b7 '+co.region:''}</div>
+          {co.description&&<div style={{fontSize:13,color:'var(--text2)',marginTop:8,lineHeight:1.6}}>{co.description}</div>}
+          <div style={{display:'flex',gap:6,marginTop:12,flexWrap:'wrap'}}>
+            {co.is_regional&&<span className="b b-seed">R\u00e9gional</span>}
+            <span className="b b-def">{co.roundCount} round{co.roundCount>1?'s':''}</span>
+          </div>
+        </div>
+        <div style={{textAlign:'right',flexShrink:0}}>
+          <div style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1px'}}>Total lev\u00e9</div>
+          <div style={{fontFamily:'var(--mono)',fontSize:28,fontWeight:700,color:'var(--accent)',letterSpacing:'-1px'}}>{fmt(co.totalRaised)}</div>
+        </div>
+      </div>
+    </div>
+    <div className="kpi-row" style={{gridTemplateColumns:'repeat(4,1fr)'}}>
+      <div className="kpi"><div className="kpi-label">Rounds</div><div className="kpi-val">{co.roundCount}</div></div>
+      <div className="kpi"><div className="kpi-label">Capital total</div><div className="kpi-val accent">{fmt(co.totalRaised)}</div></div>
+      <div className="kpi"><div className="kpi-label">Dernier round</div><div className="kpi-val" style={{fontSize:18}}>{RL[co.latestRound]||'?'}</div></div>
+      <div className="kpi"><div className="kpi-label">Investisseurs</div><div className="kpi-val">{co.allInvestors.length}</div></div>
+    </div>
+    <div className="tbl-wrap" style={{marginBottom:18}}>
+      <div className="tbl-head"><div className="tbl-title">Historique des lev\u00e9es</div><div className="tbl-meta">Chronologique</div></div>
+      <div style={{padding:20}}>
+      {co.deals.map((d,i)=><div key={d.id} className="timeline-item">
+        <div style={{position:'relative'}}><div className="timeline-dot" style={{background:RC[d.round_type]?'':undefined}}/>{i<co.deals.length-1&&<div className="timeline-line"/>}</div>
+        <div style={{flex:1,cursor:'pointer'}} onClick={()=>onSelectDeal(d)}>
+          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
+            <span className={`b ${RC[d.round_type]||'b-def'}`}>{RL[d.round_type]||'?'}</span>
+            <span style={{fontFamily:'var(--mono)',fontSize:18,fontWeight:700,color:'var(--accent)'}}>{fmt(d.total_amount)}</span>
+            <span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)',marginLeft:'auto'}}>{fmtDate(d.newsletter_date)}</span>
+          </div>
+          {d.equity_amount!=null&&<div style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)'}}>Equity {fmt(d.equity_amount)}{d.debt_amount>0?' \u00b7 Dette '+fmt(d.debt_amount):''}</div>}
+          {d.investors&&<div style={{fontSize:12,color:'var(--text2)',marginTop:4}}>{d.investors}</div>}
+          {d.source_newsletter&&<div style={{fontFamily:'var(--mono)',fontSize:10,color:'var(--text3)',marginTop:4}}>Source: {d.source_newsletter}</div>}
+        </div>
+      </div>)}
+      </div>
+    </div>
+    {co.allInvestors.length>0&&<div className="m-inv-box"><label>Tous les investisseurs</label><div className="inv-chips">{co.allInvestors.map(inv=><span key={inv} className="ic">{inv}</span>)}</div></div>}
+  </div>;}
+
+// ======== GO CAPITAL PAGE ========
+function GOCapitalPage({deals,onSelectDeal}){
+  const[funds,setFunds]=useState(getGoFunds());const[customFunds,setCustomFunds]=useState(getGoCustomFunds());const[newFund,setNewFund]=useState('');const[search,setSearch]=useState('');
+  const goDeals=useMemo(()=>deals.filter(d=>{const inv=(d.investors||'').toLowerCase();return funds.some(f=>inv.includes(f.toLowerCase()));}),[deals,funds]);
+  const filtered=goDeals.filter(d=>{if(!search)return true;const q=search.toLowerCase();return d.company_name?.toLowerCase().includes(q)||d.sector?.toLowerCase().includes(q);});
+  const totalRaised=goDeals.reduce((s,d)=>s+(d.total_amount||0),0);
+  const matchedFunds=[...new Set(goDeals.flatMap(d=>{const inv=(d.investors||'');return funds.filter(f=>inv.toLowerCase().includes(f.toLowerCase()));}))];
+  const doAdd=()=>{if(newFund.trim()){addGoFund(newFund.trim());setCustomFunds(getGoCustomFunds());setFunds(getGoFunds());setNewFund('');}};
+  const doRemove=(name)=>{removeGoFund(name);setCustomFunds(getGoCustomFunds());setFunds(getGoFunds());};
+  return<div>
+    <div className="kpi-row" style={{gridTemplateColumns:'repeat(4,1fr)'}}>
+      <div className="kpi"><div className="kpi-icon">{'\ud83c\udfe2'}</div><div className="kpi-label">Deals GO Capital</div><div className="kpi-val green">{goDeals.length}</div></div>
+      <div className="kpi"><div className="kpi-icon">{'\ud83d\udcb0'}</div><div className="kpi-label">Capital investi</div><div className="kpi-val accent">{fmt(totalRaised)}</div></div>
+      <div className="kpi"><div className="kpi-icon">{'\ud83c\udf3f'}</div><div className="kpi-label">R\u00e9gionaux</div><div className="kpi-val green">{goDeals.filter(d=>d.is_regional).length}</div></div>
+      <div className="kpi"><div className="kpi-icon">{'\ud83c\udfaf'}</div><div className="kpi-label">Fonds actifs</div><div className="kpi-val">{matchedFunds.length}</div></div>
+    </div>
+
+    <div style={{background:'var(--bg2)',border:'1px solid var(--border)',borderRadius:'var(--radius-lg)',padding:20,marginBottom:18,boxShadow:'var(--shadow-sm)'}}>
+      <div style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.2px',marginBottom:10}}>Fonds suivis (matching automatique)</div>
+      <div className="go-fund-chips">
+        {DEFAULT_GO_FUNDS.filter((v,i,a)=>a.findIndex(x=>x.toLowerCase()===v.toLowerCase())===i).slice(0,8).map(f=><div key={f} className="go-chip">{f}</div>)}
+        {customFunds.map(f=><div key={f} className="go-chip" style={{borderColor:'rgba(74,114,176,.25)',background:'var(--blue-bg)',color:'var(--blue)'}}>{f}<span className="go-chip-x" onClick={()=>doRemove(f)}>{'\u00d7'}</span></div>)}
+      </div>
+      <div className="go-add-row">
+        <input placeholder="Ajouter un nom de fonds..." value={newFund} onChange={e=>setNewFund(e.target.value)} onKeyDown={e=>e.key==='Enter'&&doAdd()} style={{background:'var(--bg)',border:'1px solid var(--border)',borderRadius:8,padding:'7px 12px',color:'var(--text)',fontFamily:'var(--sans)',fontSize:12.5,outline:'none',flex:1,maxWidth:280}}/>
+        <button className="btn btn-ghost btn-sm" onClick={doAdd} disabled={!newFund.trim()}>+ Ajouter</button>
+      </div>
+      <div style={{fontFamily:'var(--mono)',fontSize:10,color:'var(--text3)',lineHeight:1.6}}>Les noms ajout\u00e9s manuellement sont sauvegard\u00e9s localement. Utile pour les futures acquisitions de la soci\u00e9t\u00e9 de gestion.</div>
+    </div>
+
+    <div className="filters"><div className="srch"><span className="srch-ic">{'\ud83d\udd0d'}</span><input placeholder="Filtrer les deals GO Capital..." value={search} onChange={e=>setSearch(e.target.value)}/></div></div>
+
+    {filtered.length===0?<div className="empty"><div className="empty-ico">{'\ud83c\udfe2'}</div><div style={{fontSize:13.5}}>Aucun deal GO Capital trouv\u00e9</div></div>:
+    <div className="tbl-wrap"><div className="tbl-head"><div className="tbl-title">Portefeuille GO Capital</div><div className="tbl-meta">{filtered.length} deals</div></div>
+    <div style={{overflowX:'auto'}}><table><thead><tr><th>Soci\u00e9t\u00e9</th><th>Round</th><th>Total</th><th>Fonds</th><th>R\u00e9gion</th><th>Date</th></tr></thead><tbody>
+    {filtered.sort((a,b)=>(b.newsletter_date||'').localeCompare(a.newsletter_date||'')).map(d=>{
+      const matchedFund=funds.find(f=>(d.investors||'').toLowerCase().includes(f.toLowerCase()))||'';
+      return<tr key={d.id} onClick={()=>onSelectDeal(d)}>
+        <td><div className="co-cell"><div className="co-av" style={{background:'var(--green-bg)',color:'var(--green)'}}>{ini(d.company_name)}</div><div><div className="co-name">{d.company_name}</div><div className="co-sub">{d.sector||'\u2014'}</div></div></div></td>
+        <td><span className={`b ${RC[d.round_type]||'b-def'}`}>{RL[d.round_type]||'?'}</span></td>
+        <td><div className="amt">{fmt(d.total_amount)}</div></td>
+        <td><span style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--green)',fontWeight:500}}>{matchedFund}</span></td>
+        <td><div style={{display:'flex',alignItems:'center',gap:6}}><span className={`reg-dot ${d.is_regional?'reg-yes':'reg-no'}`}/><span style={{fontSize:11,fontFamily:'var(--mono)',color:d.is_regional?'var(--green)':'var(--text3)'}}>{d.region||'\u2014'}</span></div></td>
+        <td><span style={{fontFamily:'var(--mono)',fontSize:11,color:'var(--text3)'}}>{fmtDate(d.newsletter_date)}</span></td>
+      </tr>;})}
+    </tbody></table></div></div>}
+  </div>;}
+
+// ======== TABLE COMPONENTS ========
 function DealFilters({search,setSearch,roundF,setRoundF,sectorF,setSectorF,regionalF,setRegionalF,watchlistF,setWatchlistF,invData,investorF,setInvestorF,newOnly,setNewOnly,newCount}){
-  return<div className="filters"><div className="srch"><span className="srch-ic">🔍</span><input placeholder="Société, investisseur, tag..." value={search} onChange={e=>setSearch(e.target.value)}/></div>
+  return<div className="filters"><div className="srch"><span className="srch-ic">{'\ud83d\udd0d'}</span><input placeholder="Soci\u00e9t\u00e9, investisseur, tag..." value={search} onChange={e=>setSearch(e.target.value)}/></div>
     <select value={roundF} onChange={e=>setRoundF(e.target.value)}><option value="">Rounds</option>{Object.entries(RL).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select>
     <select value={sectorF} onChange={e=>setSectorF(e.target.value)}><option value="">Secteurs</option>{['HealthTech','SaaS','DeepTech','ClimateTech','FinTech','MedTech','AgriTech','SpaceTech','DefenseTech','MarTech','PropTech','Industry','Software','Other'].map(s=><option key={s} value={s}>{s}</option>)}</select>
     {invData?.investors?.length>0&&<select value={investorF} onChange={e=>setInvestorF(e.target.value)} style={{maxWidth:180}}><option value="">Investisseurs</option>{invData.investors.slice(0,40).map(i=><option key={i.name} value={i.name}>{i.name} ({i.count})</option>)}</select>}
-    <div className={`chip ${regionalF?'on':''}`} onClick={()=>setRegionalF(f=>!f)}>🌿 Régional</div><div className={`chip ${watchlistF?'on':''}`} onClick={()=>setWatchlistF(f=>!f)}>☆ Watchlist</div>
-    {newCount>0&&<div className={`chip ${newOnly?'on':''}`} onClick={()=>setNewOnly(f=>!f)} style={newOnly?{background:'var(--blue-bg)',borderColor:'rgba(74,114,176,.25)',color:'var(--blue)'}:{}}>● {newCount} nouveaux</div>}
+    <div className={`chip ${regionalF?'on':''}`} onClick={()=>setRegionalF(f=>!f)}>{'\ud83c\udf3f R\u00e9gional'}</div><div className={`chip ${watchlistF?'on':''}`} onClick={()=>setWatchlistF(f=>!f)}>{'\u2606 Watchlist'}</div>
+    {newCount>0&&<div className={`chip ${newOnly?'on':''}`} onClick={()=>setNewOnly(f=>!f)} style={newOnly?{background:'var(--blue-bg)',borderColor:'rgba(74,114,176,.25)',color:'var(--blue)'}:{}}>{'\u25cf'} {newCount} nouveaux</div>}
   </div>;}
 
 function DealTable({deals,loading,onSelect,sortBy,sortDir,onSort,lastVisit}){
-  if(loading)return<div className="loading-st"><div className="spin"/></div>;if(!deals.length)return<div className="empty"><div className="empty-ico">📭</div><div style={{fontSize:13.5}}>Aucun deal trouvé</div></div>;const si=col=>sortBy===col?(sortDir==='asc'?'↑':'↓'):'·';
-  return<div className="tbl-wrap"><div className="tbl-head"><div className="tbl-title">Levées de fonds</div><div className="tbl-meta">{deals.length} résultats</div></div><div style={{overflowX:'auto'}}><table><thead><tr><th onClick={()=>onSort('company_name')}>Société <span className="sort">{si('company_name')}</span></th><th onClick={()=>onSort('round_type')}>Round <span className="sort">{si('round_type')}</span></th><th onClick={()=>onSort('total_amount')}>Total <span className="sort">{si('total_amount')}</span></th><th>Eq / Dette</th><th>Région</th><th onClick={()=>onSort('newsletter_date')}>Date <span className="sort">{si('newsletter_date')}</span></th><th>Investisseurs</th><th style={{width:30}}></th></tr></thead><tbody>
+  if(loading)return<div className="loading-st"><div className="spin"/></div>;if(!deals.length)return<div className="empty"><div className="empty-ico">{'\ud83d\udced'}</div><div style={{fontSize:13.5}}>Aucun deal trouv\u00e9</div></div>;const si=col=>sortBy===col?(sortDir==='asc'?'\u2191':'\u2193'):'\u00b7';
+  return<div className="tbl-wrap"><div className="tbl-head"><div className="tbl-title">Lev\u00e9es de fonds</div><div className="tbl-meta">{deals.length} r\u00e9sultats</div></div><div style={{overflowX:'auto'}}><table><thead><tr><th onClick={()=>onSort('company_name')}>Soci\u00e9t\u00e9 <span className="sort">{si('company_name')}</span></th><th onClick={()=>onSort('round_type')}>Round <span className="sort">{si('round_type')}</span></th><th onClick={()=>onSort('total_amount')}>Total <span className="sort">{si('total_amount')}</span></th><th>Eq / Dette</th><th>R\u00e9gion</th><th onClick={()=>onSort('newsletter_date')}>Date <span className="sort">{si('newsletter_date')}</span></th><th>Investisseurs</th><th style={{width:30}}></th></tr></thead><tbody>
     {deals.map(d=>{const isNew=lastVisit&&d.created_at&&new Date(d.created_at)>new Date(lastVisit);return<tr key={d.id} onClick={()=>onSelect(d)}>
-      <td><div className="co-cell">{isNew&&<span className="new-dot" title="Nouveau"/>}<div className="co-av">{ini(d.company_name)}</div><div><div className="co-name">{d.company_name}</div><div className="co-sub">{d.sector||'—'}</div></div></div></td>
+      <td><div className="co-cell">{isNew&&<span className="new-dot" title="Nouveau"/>}<div className="co-av">{ini(d.company_name)}</div><div><div className="co-name">{d.company_name}</div><div className="co-sub">{d.sector||'\u2014'}</div></div></div></td>
       <td><span className={`b ${RC[d.round_type]||'b-def'}`}>{RL[d.round_type]||d.round_type||'?'}</span></td><td><div className="amt">{fmt(d.total_amount)}</div></td><td><div className="amt">{fmt(d.equity_amount)}{d.debt_amount>0&&<span className="amt-sub">dette {fmt(d.debt_amount)}</span>}</div></td>
-      <td><div style={{display:'flex',alignItems:'center',gap:6}}><span className={`reg-dot ${d.is_regional?'reg-yes':'reg-no'}`}/><span style={{fontSize:12,color:d.is_regional?'var(--green)':'var(--text3)',fontFamily:'var(--mono)'}}>{d.region||'—'}</span></div></td>
-      <td><span style={{fontFamily:'var(--mono)',fontSize:11.5,color:'var(--text3)'}}>{d.newsletter_date||'—'}</span></td><td><div style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--text3)',maxWidth:200,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={d.investors}>{d.investors||'—'}</div></td>
-      <td onClick={e=>e.stopPropagation()} style={{textAlign:'center'}}>{d.watchlist&&<span style={{fontSize:12}}>⭐</span>}</td></tr>;})}
+      <td><div style={{display:'flex',alignItems:'center',gap:6}}><span className={`reg-dot ${d.is_regional?'reg-yes':'reg-no'}`}/><span style={{fontSize:12,color:d.is_regional?'var(--green)':'var(--text3)',fontFamily:'var(--mono)'}}>{d.region||'\u2014'}</span></div></td>
+      <td><span style={{fontFamily:'var(--mono)',fontSize:11.5,color:'var(--text3)'}}>{d.newsletter_date||'\u2014'}</span></td><td><div style={{fontFamily:'var(--mono)',fontSize:10.5,color:'var(--text3)',maxWidth:200,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={d.investors}>{d.investors||'\u2014'}</div></td>
+      <td onClick={e=>e.stopPropagation()} style={{textAlign:'center'}}>{d.watchlist&&<span style={{fontSize:12}}>{'\u2b50'}</span>}</td></tr>;})}
   </tbody></table></div></div>;}
 
-function ExitTable({exits,loading,onSelect}){if(loading)return<div className="loading-st"><div className="spin"/></div>;if(!exits.length)return<div className="empty"><div className="empty-ico">🚪</div><div style={{fontSize:13.5}}>Aucun exit trouvé</div></div>;
-  return<div className="tbl-wrap"><div className="tbl-head"><div className="tbl-title">Exits & M&A</div><div className="tbl-meta">{exits.length} résultats</div></div><div style={{overflowX:'auto'}}><table><thead><tr><th>Société</th><th>Type</th><th>Acquéreur</th><th>Pays</th><th>Valorisation</th><th>Région</th><th>Date</th></tr></thead><tbody>
-    {exits.map(e=><tr key={e.id} onClick={()=>onSelect(e)}><td><div className="co-cell"><div className="co-av">{ini(e.company_name)}</div><div><div className="co-name">{e.company_name}</div><div className="co-sub">{e.sector||'—'}</div></div></div></td><td><span className="b b-exit">{e.deal_type||'Exit'}</span></td><td><div className="acquirer-cell">{e.acquirer_name||'—'}</div></td><td><span style={{fontFamily:'var(--mono)',fontSize:11.5,color:'var(--text3)'}}>{e.acquirer_country||'—'}</span></td><td><div className="amt">{e.deal_value?fmt(e.deal_value):'N/D'}</div></td><td><div style={{display:'flex',alignItems:'center',gap:6}}><span className={`reg-dot ${e.is_regional?'reg-yes':'reg-no'}`}/><span style={{fontSize:12,color:e.is_regional?'var(--green)':'var(--text3)',fontFamily:'var(--mono)'}}>{e.region||'—'}</span></div></td><td><span style={{fontFamily:'var(--mono)',fontSize:11.5,color:'var(--text3)'}}>{e.newsletter_date||'—'}</span></td></tr>)}
+function ExitTable({exits,loading,onSelect}){if(loading)return<div className="loading-st"><div className="spin"/></div>;if(!exits.length)return<div className="empty"><div className="empty-ico">{'\ud83d\udeaa'}</div><div style={{fontSize:13.5}}>Aucun exit trouv\u00e9</div></div>;
+  return<div className="tbl-wrap"><div className="tbl-head"><div className="tbl-title">Exits & M&A</div><div className="tbl-meta">{exits.length} r\u00e9sultats</div></div><div style={{overflowX:'auto'}}><table><thead><tr><th>Soci\u00e9t\u00e9</th><th>Type</th><th>Acqu\u00e9reur</th><th>Pays</th><th>Valorisation</th><th>R\u00e9gion</th><th>Date</th></tr></thead><tbody>
+    {exits.map(e=><tr key={e.id} onClick={()=>onSelect(e)}><td><div className="co-cell"><div className="co-av">{ini(e.company_name)}</div><div><div className="co-name">{e.company_name}</div><div className="co-sub">{e.sector||'\u2014'}</div></div></div></td><td><span className="b b-exit">{e.deal_type||'Exit'}</span></td><td><div className="acquirer-cell">{e.acquirer_name||'\u2014'}</div></td><td><span style={{fontFamily:'var(--mono)',fontSize:11.5,color:'var(--text3)'}}>{e.acquirer_country||'\u2014'}</span></td><td><div className="amt">{e.deal_value?fmt(e.deal_value):'N/D'}</div></td><td><div style={{display:'flex',alignItems:'center',gap:6}}><span className={`reg-dot ${e.is_regional?'reg-yes':'reg-no'}`}/><span style={{fontSize:12,color:e.is_regional?'var(--green)':'var(--text3)',fontFamily:'var(--mono)'}}>{e.region||'\u2014'}</span></div></td><td><span style={{fontFamily:'var(--mono)',fontSize:11.5,color:'var(--text3)'}}>{e.newsletter_date||'\u2014'}</span></td></tr>)}
   </tbody></table></div></div>;}
 
+// ======== MAIN APP ========
 function App(){
   const[page,setPage]=useState('deals');const[search,setSearch]=useState('');const[roundF,setRoundF]=useState('');const[sectorF,setSectorF]=useState('');const[regionalF,setRegionalF]=useState(false);const[watchlistF,setWatchlistF]=useState(false);const[investorF,setInvestorF]=useState('');const[newOnly,setNewOnly]=useState(false);const[selectedDeal,setSelectedDeal]=useState(null);const[selectedExit,setSelectedExit]=useState(null);const[showAdd,setShowAdd]=useState(false);const[showSettings,setShowSettings]=useState(false);const[toast,setToast]=useState(null);const[refetchKey,setRefetchKey]=useState(0);const[sortBy,setSortBy]=useState('created_at');const[sortDir,setSortDir]=useState('desc');
   const lastVisit=useRef(getLastVisit());useEffect(()=>{const t=setTimeout(()=>setLastVisit(),5000);return()=>clearTimeout(t);},[]);
@@ -226,43 +382,78 @@ function App(){
   const filteredDeals=newOnly&&lastVisit.current?deals.filter(d=>d.created_at&&new Date(d.created_at)>new Date(lastVisit.current)):deals;
   const sorted=[...filteredDeals].sort((a,b)=>{let av=a[sortBy],bv=b[sortBy];if(!av)return 1;if(!bv)return-1;if(typeof av==='string')return sortDir==='asc'?av.localeCompare(bv):bv.localeCompare(av);return sortDir==='asc'?av-bv:bv-av;});
   const toggleSort=col=>{if(sortBy===col)setSortDir(d=>d==='asc'?'desc':'asc');else{setSortBy(col);setSortDir('desc');}};
+
+  // Date range for ticker
+  const allDates=deals.map(d=>d.newsletter_date).filter(Boolean).sort();
+  const firstDate=allDates[0]||null;const lastDate=allDates[allDates.length-1]||null;
+
+  // Top deals this month
   const now=new Date();const monthStart=new Date(now.getFullYear(),now.getMonth(),1).toISOString().slice(0,10);const topDeals=[...deals].filter(d=>d.newsletter_date>=monthStart&&d.total_amount).sort((a,b)=>(b.total_amount||0)-(a.total_amount||0)).slice(0,5);
-  const exportCSV=()=>{const h=['Société','Round','Equity','Dette','Total','Région','Secteur','Investisseurs','Source','Date','Tags','Watchlist'];const rows=sorted.map(d=>[d.company_name,RL[d.round_type]||d.round_type,d.equity_amount||'',d.debt_amount||'',d.total_amount||'',d.region||'',d.sector||'',d.investors||'',d.source_newsletter||'',d.newsletter_date||'',d.tags||'',d.watchlist?'Oui':'']);const csv=[h,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download='dealflow.csv';a.click();};
-  const onDealUpdate=u=>{setSelectedDeal(u);refetchDeals();};const onDealDelete=()=>{setSelectedDeal(null);refresh();pushToast('Deal supprimé');};const onExitUpdate=u=>{setSelectedExit(u);refetchExits();};const onExitDelete=()=>{setSelectedExit(null);refresh();pushToast('Exit supprimé');};const onTagClick=tag=>{setSearch(tag);setPage('deals');};
+
+  // GO Capital count
+  const goCount=useMemo(()=>deals.filter(isGoCapitalDeal).length,[deals]);
+
+  const exportCSV=()=>{const h=['Soci\u00e9t\u00e9','Round','Equity','Dette','Total','R\u00e9gion','Secteur','Investisseurs','Source','Date','Tags','Watchlist'];const rows=sorted.map(d=>[d.company_name,RL[d.round_type]||d.round_type,d.equity_amount||'',d.debt_amount||'',d.total_amount||'',d.region||'',d.sector||'',d.investors||'',d.source_newsletter||'',d.newsletter_date||'',d.tags||'',d.watchlist?'Oui':'']);const csv=[h,...rows].map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download='dealflow.csv';a.click();};
+  const onDealUpdate=u=>{setSelectedDeal(u);refetchDeals();};const onDealDelete=()=>{setSelectedDeal(null);refresh();pushToast('Deal supprim\u00e9');};const onExitUpdate=u=>{setSelectedExit(u);refetchExits();};const onExitDelete=()=>{setSelectedExit(null);refresh();pushToast('Exit supprim\u00e9');};const onTagClick=tag=>{setSearch(tag);setPage('deals');};
   const watchlisted=deals.filter(d=>d.watchlist);const watchlistedExits=exits.filter(e=>e.watchlist);
-  const PAGES=[{id:'deals',ico:'◉',label:'Deals'},{id:'exits',ico:'→',label:'Exits & M&A'},{id:'top',ico:'▲',label:'Top du mois'},{id:'watchlist',ico:'☆',label:'Watchlist'},{id:'import',ico:'↯',label:'Import'},{id:'analytics',ico:'◔',label:'Analytics'}];
+
+  const PAGES=[
+    {id:'deals',ico:'\u25c9',label:'Deals'},
+    {id:'companies',ico:'\ud83c\udfdb',label:'Soci\u00e9t\u00e9s'},
+    {id:'exits',ico:'\u2192',label:'Exits & M&A'},
+    {id:'top',ico:'\u25b2',label:'Top du mois'},
+    {id:'gocapital',ico:'\ud83c\udfe2',label:'GO Capital'},
+    {id:'watchlist',ico:'\u2606',label:'Watchlist'},
+    {id:'import',ico:'\u21af',label:'Import'},
+    {id:'analytics',ico:'\u25d4',label:'Analytics'},
+  ];
 
   return<div className="shell">
-    <aside className="sidebar"><div className="slogo"><div className="slogo-inner"><div className="slogo-glyph">Df</div><div><div className="slogo-name">DealFlow</div><div className="slogo-sub">Monitor v2.2</div></div></div></div>
+    <aside className="sidebar"><div className="slogo"><div className="slogo-inner"><div className="slogo-glyph">Df</div><div><div className="slogo-name">DealFlow</div><div className="slogo-sub">Monitor v2.3</div></div></div></div>
       <nav className="nav"><div className="nav-section">Navigation</div>
-        {PAGES.map(p=><div key={p.id} className={`nav-item ${page===p.id?'active':''}`} onClick={()=>setPage(p.id)}><span className="ni">{p.ico}</span>{p.label}{p.id==='watchlist'&&(watchlisted.length+watchlistedExits.length)>0&&<span className="nav-badge">{watchlisted.length+watchlistedExits.length}</span>}{p.id==='deals'&&newCount>0&&<span className="nav-badge new">{newCount}</span>}</div>)}
+        {PAGES.map(p=><div key={p.id} className={`nav-item ${page===p.id?'active':''}`} onClick={()=>setPage(p.id)}><span className="ni">{p.ico}</span>{p.label}
+          {p.id==='watchlist'&&(watchlisted.length+watchlistedExits.length)>0&&<span className="nav-badge">{watchlisted.length+watchlistedExits.length}</span>}
+          {p.id==='deals'&&newCount>0&&<span className="nav-badge new">{newCount}</span>}
+          {p.id==='gocapital'&&goCount>0&&<span className="nav-badge go">{goCount}</span>}
+        </div>)}
         <div className="nav-section" style={{marginTop:12}}>Actions</div>
         <div className="nav-item" onClick={()=>setShowAdd(true)}><span className="ni">+</span>Ajouter un deal</div>
-        <div className="nav-item" onClick={()=>setShowSettings(true)}><span className="ni">⚙</span>Configuration</div></nav>
-      <div className="sfooter"><div className="sfooter-stat"><span>{stats?.total_deals||0}</span> deals · <span>{stats?.total_exits||0}</span> exits</div><div className="sfooter-stat"><span>{fmt(stats?.total_raised||0)}</span> tracés</div><div className="sfooter-stat"><span>{stats?.regional_count||0}</span> régionaux · <span>{stats?.watchlist_count||0}</span> ⭐</div></div></aside>
+        <div className="nav-item" onClick={()=>setShowSettings(true)}><span className="ni">{'\u2699'}</span>Configuration</div></nav>
+      <div className="sfooter"><div className="sfooter-stat"><span>{stats?.total_deals||0}</span> deals {'\u00b7'} <span>{stats?.total_exits||0}</span> exits</div><div className="sfooter-stat"><span>{fmt(stats?.total_raised||0)}</span> trac\u00e9s</div><div className="sfooter-stat"><span>{stats?.regional_count||0}</span> r\u00e9gionaux {'\u00b7'} <span>{stats?.watchlist_count||0}</span> {'\u2b50'}</div></div></aside>
 
     <main className="main">
-      {stats&&<div className="ticker"><span>Deals</span> {stats.total_deals} · <span>Capital</span> {fmt(stats.total_raised)} · <span>Exits</span> {stats.total_exits} · <span>Régionaux</span> {stats.regional_count} ({stats.regional_pct}%) · <span>Watchlist</span> {stats.watchlist_count}</div>}
-      <div className="topbar"><div><span className="topbar-title">{PAGES.find(p=>p.id===page)?.label}</span></div><div className="topbar-right">{(page==='deals'||page==='watchlist')&&<button className="btn btn-ghost btn-sm" onClick={exportCSV}>↓ CSV</button>}<button className="btn btn-accent btn-sm" onClick={()=>setShowAdd(true)}>+ Deal</button></div></div>
+      {stats&&<div className="ticker">
+        <span>Deals</span> {stats.total_deals} {'\u00b7'}
+        <span>Capital</span> {fmt(stats.total_raised)} {'\u00b7'}
+        <span>Exits</span> {stats.total_exits} {'\u00b7'}
+        <span>R\u00e9gionaux</span> {stats.regional_count} ({stats.regional_pct}%) {'\u00b7'}
+        <span>Watchlist</span> {stats.watchlist_count}
+        {firstDate&&<><span className="ticker-sep">{'\u2502'}</span><span>P\u00e9rim\u00e8tre</span> {fmtDate(firstDate)} {'\u2192'} {fmtDate(lastDate)}</>}
+      </div>}
+      <div className="topbar"><div><span className="topbar-title">{PAGES.find(p=>p.id===page)?.label}</span></div><div className="topbar-right">{(page==='deals'||page==='watchlist'||page==='gocapital')&&<button className="btn btn-ghost btn-sm" onClick={exportCSV}>{'\u2193'} CSV</button>}<button className="btn btn-accent btn-sm" onClick={()=>setShowAdd(true)}>+ Deal</button></div></div>
       <div className="page">
-        {needsCfg&&<div className="cfg-banner"><div><div className="cfg-text"><strong>Configuration requise</strong> — connectez votre backend</div><div className="cfg-url" onClick={()=>setShowSettings(true)}>→ Configurer</div></div></div>}
+        {needsCfg&&<div className="cfg-banner"><div><div className="cfg-text"><strong>Configuration requise</strong> {'\u2014'} connectez votre backend</div><div className="cfg-url" onClick={()=>setShowSettings(true)}>{'\u2192'} Configurer</div></div></div>}
 
-        {page==='deals'&&<>{stats&&<div className="kpi-row"><div className="kpi"><div className="kpi-icon">📋</div><div className="kpi-label">Total deals</div><div className="kpi-val">{stats.total_deals}</div></div><div className="kpi"><div className="kpi-icon">💰</div><div className="kpi-label">Capital</div><div className="kpi-val accent">{fmt(stats.total_raised)}</div></div><div className="kpi"><div className="kpi-icon">🌿</div><div className="kpi-label">Régionaux</div><div className="kpi-val green">{stats.regional_count}</div><div className="kpi-sub">BZH · PDL · NOR · CVL</div></div><div className="kpi"><div className="kpi-icon">📈</div><div className="kpi-label">Equity</div><div className="kpi-val">{fmt(stats.total_equity)}</div></div><div className="kpi"><div className="kpi-icon">🏦</div><div className="kpi-label">Dette</div><div className="kpi-val">{fmt(stats.total_debt)}</div></div></div>}<DealFilters search={search} setSearch={setSearch} roundF={roundF} setRoundF={setRoundF} sectorF={sectorF} setSectorF={setSectorF} regionalF={regionalF} setRegionalF={setRegionalF} watchlistF={watchlistF} setWatchlistF={setWatchlistF} invData={invData} investorF={investorF} setInvestorF={setInvestorF} newOnly={newOnly} setNewOnly={setNewOnly} newCount={newCount}/><DealTable deals={sorted} loading={dealLoading} onSelect={setSelectedDeal} sortBy={sortBy} sortDir={sortDir} onSort={toggleSort} lastVisit={lastVisit.current}/></>}
+        {page==='deals'&&<>{stats&&<div className="kpi-row"><div className="kpi"><div className="kpi-icon">{'\ud83d\udccb'}</div><div className="kpi-label">Total deals</div><div className="kpi-val">{stats.total_deals}</div></div><div className="kpi"><div className="kpi-icon">{'\ud83d\udcb0'}</div><div className="kpi-label">Capital</div><div className="kpi-val accent">{fmt(stats.total_raised)}</div></div><div className="kpi"><div className="kpi-icon">{'\ud83c\udf3f'}</div><div className="kpi-label">R\u00e9gionaux</div><div className="kpi-val green">{stats.regional_count}</div><div className="kpi-sub">BZH {'\u00b7'} PDL {'\u00b7'} NOR {'\u00b7'} CVL</div></div><div className="kpi"><div className="kpi-icon">{'\ud83d\udcc8'}</div><div className="kpi-label">Equity</div><div className="kpi-val">{fmt(stats.total_equity)}</div></div><div className="kpi"><div className="kpi-icon">{'\ud83c\udfe6'}</div><div className="kpi-label">Dette</div><div className="kpi-val">{fmt(stats.total_debt)}</div></div></div>}<DealFilters search={search} setSearch={setSearch} roundF={roundF} setRoundF={setRoundF} sectorF={sectorF} setSectorF={setSectorF} regionalF={regionalF} setRegionalF={setRegionalF} watchlistF={watchlistF} setWatchlistF={setWatchlistF} invData={invData} investorF={investorF} setInvestorF={setInvestorF} newOnly={newOnly} setNewOnly={setNewOnly} newCount={newCount}/><DealTable deals={sorted} loading={dealLoading} onSelect={setSelectedDeal} sortBy={sortBy} sortDir={sortDir} onSort={toggleSort} lastVisit={lastVisit.current}/></>}
 
-        {page==='exits'&&<>{stats&&<div className="kpi-row" style={{gridTemplateColumns:'repeat(3,1fr)'}}><div className="kpi"><div className="kpi-icon">🚪</div><div className="kpi-label">Exits</div><div className="kpi-val">{stats.total_exits}</div></div><div className="kpi"><div className="kpi-icon">🌿</div><div className="kpi-label">Régionaux</div><div className="kpi-val green">{exits.filter(e=>e.is_regional).length}</div></div><div className="kpi"><div className="kpi-icon">☆</div><div className="kpi-label">Watchlistés</div><div className="kpi-val">{exits.filter(e=>e.watchlist).length}</div></div></div>}<div className="filters" style={{marginBottom:16}}><div className="srch"><span className="srch-ic">🔍</span><input placeholder="Société, acquéreur..." value={search} onChange={e=>setSearch(e.target.value)}/></div><div className={`chip ${regionalF?'on':''}`} onClick={()=>setRegionalF(f=>!f)}>🌿 Régional</div><div className={`chip ${watchlistF?'on':''}`} onClick={()=>setWatchlistF(f=>!f)}>☆ Watchlist</div></div><ExitTable exits={exits.filter(e=>{if(!search)return true;const q=search.toLowerCase();return e.company_name?.toLowerCase().includes(q)||e.acquirer_name?.toLowerCase().includes(q);})} loading={exitLoading} onSelect={setSelectedExit}/></>}
+        {page==='companies'&&<CompaniesPage deals={deals} onSelectDeal={setSelectedDeal}/>}
 
-        {page==='top'&&<><div style={{marginBottom:20,maxWidth:500}}><div style={{fontFamily:'var(--serif)',fontSize:18,fontWeight:500,marginBottom:6}}>Top 5 levées du mois</div><div style={{fontSize:13,color:'var(--text3)'}}>Les plus grosses levées de {now.toLocaleString('fr-FR',{month:'long',year:'numeric'})}</div></div>{topDeals.length===0&&<div className="empty"><div className="empty-ico">▲</div><div style={{fontSize:13.5}}>Aucun deal ce mois-ci</div></div>}{topDeals.map((d,i)=><div key={d.id} className="top-card" onClick={()=>setSelectedDeal(d)}><div className="top-rank">{i+1}</div><div className="co-av" style={{width:36,height:36,fontSize:13}}>{ini(d.company_name)}</div><div className="top-info"><div className="top-name">{d.company_name}</div><div className="top-meta">{d.sector||'—'} · {RL[d.round_type]||'?'} · {d.investors?.split(',')[0]||'—'}</div></div><div className="top-amount">{fmt(d.total_amount)}</div></div>)}</>}
+        {page==='exits'&&<>{stats&&<div className="kpi-row" style={{gridTemplateColumns:'repeat(3,1fr)'}}><div className="kpi"><div className="kpi-icon">{'\ud83d\udeaa'}</div><div className="kpi-label">Exits</div><div className="kpi-val">{stats.total_exits}</div></div><div className="kpi"><div className="kpi-icon">{'\ud83c\udf3f'}</div><div className="kpi-label">R\u00e9gionaux</div><div className="kpi-val green">{exits.filter(e=>e.is_regional).length}</div></div><div className="kpi"><div className="kpi-icon">{'\u2606'}</div><div className="kpi-label">Watchlist\u00e9s</div><div className="kpi-val">{exits.filter(e=>e.watchlist).length}</div></div></div>}<div className="filters" style={{marginBottom:16}}><div className="srch"><span className="srch-ic">{'\ud83d\udd0d'}</span><input placeholder="Soci\u00e9t\u00e9, acqu\u00e9reur..." value={search} onChange={e=>setSearch(e.target.value)}/></div><div className={`chip ${regionalF?'on':''}`} onClick={()=>setRegionalF(f=>!f)}>{'\ud83c\udf3f R\u00e9gional'}</div><div className={`chip ${watchlistF?'on':''}`} onClick={()=>setWatchlistF(f=>!f)}>{'\u2606 Watchlist'}</div></div><ExitTable exits={exits.filter(e=>{if(!search)return true;const q=search.toLowerCase();return e.company_name?.toLowerCase().includes(q)||e.acquirer_name?.toLowerCase().includes(q);})} loading={exitLoading} onSelect={setSelectedExit}/></>}
 
-        {page==='watchlist'&&<><div style={{marginBottom:16,fontSize:13,color:'var(--text3)'}}>Deals et exits suivis activement</div>{watchlisted.length>0&&<><div style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.5px',marginBottom:10}}>Deals</div><DealTable deals={watchlisted} loading={false} onSelect={setSelectedDeal} sortBy="created_at" sortDir="desc" onSort={()=>{}}/></>}{watchlistedExits.length>0&&<><div style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.5px',margin:'22px 0 10px'}}>Exits</div><ExitTable exits={watchlistedExits} loading={false} onSelect={setSelectedExit}/></>}{watchlisted.length===0&&watchlistedExits.length===0&&<div className="empty"><div className="empty-ico">☆</div><div style={{fontSize:13.5}}>Watchlist vide<br/><span style={{fontSize:12,display:'block',color:'var(--text3)',marginTop:6}}>Ouvre une fiche et clique ☆</span></div></div>}</>}
+        {page==='top'&&<><div style={{marginBottom:20,maxWidth:500}}><div style={{fontFamily:'var(--serif)',fontSize:18,fontWeight:500,marginBottom:6}}>Top 5 lev\u00e9es du mois</div><div style={{fontSize:13,color:'var(--text3)'}}>Les plus grosses lev\u00e9es de {now.toLocaleString('fr-FR',{month:'long',year:'numeric'})}</div></div>{topDeals.length===0&&<div className="empty"><div className="empty-ico">{'\u25b2'}</div><div style={{fontSize:13.5}}>Aucun deal ce mois-ci</div></div>}{topDeals.map((d,i)=><div key={d.id} className="top-card" onClick={()=>setSelectedDeal(d)}><div className="top-rank">{i+1}</div><div className="co-av" style={{width:36,height:36,fontSize:13}}>{ini(d.company_name)}</div><div className="top-info"><div className="top-name">{d.company_name}</div><div className="top-meta">{d.sector||'\u2014'} {'\u00b7'} {RL[d.round_type]||'?'} {'\u00b7'} {d.investors?.split(',')[0]||'\u2014'}</div></div><div className="top-amount">{fmt(d.total_amount)}</div></div>)}</>}
 
-        {page==='import'&&<><ImportPanel onSuccess={()=>{refresh();pushToast('Import réussi !');}}/><div style={{marginTop:8,marginBottom:20}}><div style={{fontFamily:'var(--serif)',fontSize:15,fontWeight:500,marginBottom:12}}>Historique des imports</div><ImportHistory/></div><div style={{fontSize:13,color:'var(--text3)',lineHeight:1.8,maxWidth:600}}><div style={{marginBottom:8,color:'var(--text2)',fontWeight:500,fontSize:14,fontFamily:'var(--serif)'}}>Comment ça marche</div>L'import utilise <strong style={{color:'var(--text)'}}>Gemini Flash</strong> pour extraire automatiquement les deals, exits et la présence régionale.<br/><br/>Webhook Make.com : <code style={{background:'var(--bg3)',padding:'2px 7px',borderRadius:5,fontFamily:'var(--mono)',fontSize:11.5}}>/webhook/newsletter</code></div></>}
+        {page==='gocapital'&&<GOCapitalPage deals={deals} onSelectDeal={setSelectedDeal}/>}
+
+        {page==='watchlist'&&<><div style={{marginBottom:16,fontSize:13,color:'var(--text3)'}}>Deals et exits suivis activement</div>{watchlisted.length>0&&<><div style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.5px',marginBottom:10}}>Deals</div><DealTable deals={watchlisted} loading={false} onSelect={setSelectedDeal} sortBy="created_at" sortDir="desc" onSort={()=>{}}/></>}{watchlistedExits.length>0&&<><div style={{fontFamily:'var(--mono)',fontSize:9.5,color:'var(--text3)',textTransform:'uppercase',letterSpacing:'1.5px',margin:'22px 0 10px'}}>Exits</div><ExitTable exits={watchlistedExits} loading={false} onSelect={setSelectedExit}/></>}{watchlisted.length===0&&watchlistedExits.length===0&&<div className="empty"><div className="empty-ico">{'\u2606'}</div><div style={{fontSize:13.5}}>Watchlist vide<br/><span style={{fontSize:12,display:'block',color:'var(--text3)',marginTop:6}}>Ouvre une fiche et clique {'\u2606'}</span></div></div>}</>}
+
+        {page==='import'&&<><ImportPanel onSuccess={()=>{refresh();pushToast('Import r\u00e9ussi !');}}/><div style={{marginTop:8,marginBottom:20}}><div style={{fontFamily:'var(--serif)',fontSize:15,fontWeight:500,marginBottom:12}}>Historique des imports</div><ImportHistory/></div><div style={{fontSize:13,color:'var(--text3)',lineHeight:1.8,maxWidth:600}}><div style={{marginBottom:8,color:'var(--text2)',fontWeight:500,fontSize:14,fontFamily:'var(--serif)'}}>Comment \u00e7a marche</div>L'import utilise <strong style={{color:'var(--text)'}}>Gemini Flash</strong> pour extraire automatiquement les deals, exits et la pr\u00e9sence r\u00e9gionale.<br/><br/>Webhook Make.com : <code style={{background:'var(--bg3)',padding:'2px 7px',borderRadius:5,fontFamily:'var(--mono)',fontSize:11.5}}>/webhook/newsletter</code></div></>}
 
         {page==='analytics'&&<Analytics key={refetchKey} deals={deals}/>}
       </div>
     </main>
     {selectedDeal&&<DealModal deal={selectedDeal} onClose={()=>setSelectedDeal(null)} onUpdate={onDealUpdate} onDelete={onDealDelete} onTagClick={onTagClick}/>}
     {selectedExit&&<ExitModal exit={selectedExit} onClose={()=>setSelectedExit(null)} onUpdate={onExitUpdate} onDelete={onExitDelete}/>}
-    {showAdd&&<AddDeal onClose={()=>setShowAdd(false)} onSuccess={()=>{refresh();pushToast('Deal ajouté !');}}/>}
+    {showAdd&&<AddDeal onClose={()=>setShowAdd(false)} onSuccess={()=>{refresh();pushToast('Deal ajout\u00e9 !');}}/>}
     {showSettings&&<Settings onClose={()=>setShowSettings(false)}/>}
     {toast&&<Toast msg={toast.msg} type={toast.type}/>}
   </div>;}
